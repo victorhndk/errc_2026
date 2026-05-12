@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ERRC 2026 Evento</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; line-height: 1.6; color: #333; background-color: #f4f7f6; }
+        
+        header { display: flex; justify-content: space-between; align-items: center; padding: 1.5rem 10%; background: #04294f; color: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        nav a { color: white; text-decoration: none; margin-left: 25px; font-weight: 600; transition: 0.3s; padding: 5px 10px; border-radius: 4px;}
+        nav a:hover { background: #3a71c4; }
+
+        .banner { 
+            text-align: center; 
+            padding: 60px 20px; 
+            background: linear-gradient(135deg, #04294f 0%, #1a5c9e 100%); 
+            color: white; 
+        }
+
+        main { padding: 40px 10%; max-width: 1200px; margin: auto; }
+
+        .info-section { margin-bottom: 50px; text-align: center; }
+        .info-section h2 { color: #04294f; margin-bottom: 20px; font-size: 2rem; }
+        .info-text { max-width: 800px; margin: 0 auto; text-align: justify; background: #fff; padding: 30px; border-radius: 15px; border-left: 5px solid #3a71c4; box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
+
+        .contact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-top: 40px; }
+        
+        .contact-card { 
+            padding: 30px; 
+            border-radius: 15px; 
+            background: white; 
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+            border: 1px solid #eee;
+            text-align: center;
+        }
+        .contact-card h3 { color: #04294f; margin-bottom: 15px; }
+        .contact-card p { font-size: 1.1rem; color: #555; }
+        .contact-card a { color: #3a71c4; text-decoration: none; font-weight: 600; }
+
+        footer { text-align: center; padding: 40px; background: #04294f; color: white; margin-top: 60px; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">
+            <strong style="font-size: 1.5rem; letter-spacing: 1px;">ERRC 2026</strong>
+        </div>
+        <nav aria-label="Menu Principal">
+            <a href="TelaInicial.html">Início</a>
+            <a href="Sobre.html">Sobre</a>
+            <a href="Localizacao.html">Localização</a>
+            <a href="Programacao.html">Programação</a>
+            <a href="Inscricoes.html">Inscrições</a>
+        </nav>
+    </header>
+
+    <section class="banner">
+        <h1>Fale Conosco</h1>
+        <p>Dúvidas sobre o evento ou sobre o projeto? Estamos à disposição.</p>
+    </section>
+
+    <main>
+        <section class="info-section">
+            <h2>Sobre o Projeto do Site</h2>
+            <div class="info-text">
+                <p>Este site foi desenvolvido como um <strong>esqueleto</strong> para a Escola Regional de Redes de Computadores (ERRC 2026). A existência deste modelo é fundamental para garantir uma estrutura de navegação intuitiva e rápida, servindo como base sólida para a implementação de conteúdos dinâmicos.</p>
+                <br>
+                <p>Ele serve para centralizar as informações acadêmicas e profissionais do evento, permitindo que estudantes e especialistas encontrem detalhes sobre minicursos, palestras e inscrições de forma organizada, otimizando o fluxo de comunicação entre a organização e os participantes.</p>
+            </div>
+        </section>
+        <section class="contact-grid">
+            <div class="contact-card">
+                <h3>E-mail</h3>
+                <p>Para dúvidas acadêmicas ou suporte:</p>
+                <a href="mailto:victor.stefano@redes.ufsm.br">victor.stefano@redes.ufsm.br</a>
+            </div>
+
+            <div class="contact-card">
+                <h3>Telefone / WhatsApp</h3>
+                <p>Atendimento direto:</p>
+                <a href="https://wa.me/5555999813878" target="_blank">+55 (55) 99981-3878</a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 ERRC - Todos os direitos reservados.</p>
+        <p>UFSM - Santa Maria, RS</p>
+    </footer>
+
+</body>
+</html>
