@@ -3,15 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ERRC 2026 - Programação Prevista para o Evento</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <title>ERRC 2026 - Programação Oficial do Evento</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: 'Inter', sans-serif; line-height: 1.6; color: #333; background-color: #f4f7f6; }
         html { scroll-behavior: smooth; }
 
         header { display: flex; justify-content: space-between; align-items: center; padding: 1.5rem 10%; background: #04294f; color: white; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
-        nav a { color: white; text-decoration: none; margin-left: 20px; font-weight: 600; transition: 0.3s; padding: 5px 10px; border-radius: 4px;}
+        nav a { color: white; text-decoration: none; margin-left: 20px; font-weight: 600; transition: 0.3s; padding: 8px 12px; border-radius: 4px;}
         nav a:hover { background: #3a71c4; }
 
         .banner { 
@@ -20,19 +20,19 @@
             background: linear-gradient(135deg, #04294f 0%, #1a5c9e 100%); 
             color: white; 
         }
-        .banner h1 { font-size: 2.5rem; margin-bottom: 10px; }
+        .banner h1 { font-size: 2.5rem; margin-bottom: 10px; font-weight: 800; }
 
-        main { padding: 40px 10%; max-width: 1200px; margin: auto; }
+        main { padding: 40px 10%; max-width: 1200px; margin: auto; min-height: 500px; }
         
         .dia-seletor { 
             display: flex; 
             justify-content: center; 
-            gap: 10px; 
+            gap: 15px; 
             margin-bottom: 40px; 
             flex-wrap: wrap;
         }
         .dia-btn { 
-            padding: 10px 20px; 
+            padding: 12px 25px; 
             background: #fff; 
             border: 2px solid #04294f; 
             color: #04294f; 
@@ -40,11 +40,22 @@
             border-radius: 50px; 
             cursor: pointer; 
             transition: 0.3s;
-            font-size: 0.9rem;
+            font-size: 0.95rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
         }
         .dia-btn.active, .dia-btn:hover { 
             background: #04294f; 
             color: #fff; 
+            transform: translateY(-2px);
+        }
+
+    
+        .cronograma-dia { display: none; }
+        .cronograma-dia.active { display: block; animation: fadeIn 0.4s ease-in-out; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .cronograma-container { background: white; border-radius: 15px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
@@ -60,33 +71,49 @@
         
         .horario { 
             background: #f0f4f8; 
-            padding: 20px; 
+            padding: 25px 20px; 
             display: flex; 
             align-items: center; 
             justify-content: center; 
             font-weight: 800; 
             color: #04294f; 
-            font-size: 1rem;
+            font-size: 1.05rem;
             text-align: center;
+            border-right: 1px solid #e2e8f0;
         }
 
-        .detalhes { padding: 20px; }
-        .detalhes h3 { color: #1a5c9e; margin-bottom: 5px; font-size: 1.2rem; }
-        .detalhes .palestrante { font-weight: 600; color: #555; font-size: 0.85rem; margin-bottom: 8px; display: block; }
-        .detalhes p { color: #666; font-size: 0.9rem; line-height: 1.4; }
+        .detalhes { padding: 25px; }
+        
+        .sub-atividade {
+            padding-bottom: 15px;
+            margin-bottom: 15px;
+            border-bottom: 1px dashed #e2e8f0;
+        }
+        .sub-atividade:last-child {
+            padding-bottom: 0;
+            margin-bottom: 0;
+            border-bottom: none;
+        }
+
+        .detalhes h3 { color: #04294f; margin-bottom: 5px; font-size: 1.25rem; font-weight: 700; }
+        .detalhes .local { font-weight: 600; color: #e65100; font-size: 0.85rem; margin-bottom: 6px; display: block; text-transform: uppercase;}
+        .detalhes p { color: #555; font-size: 0.95rem; line-height: 1.5; }
         
         .tipo-tag { 
             display: inline-block; 
-            padding: 4px 10px; 
+            padding: 4px 12px; 
             border-radius: 4px; 
             font-size: 0.7rem; 
             text-transform: uppercase; 
             font-weight: 800; 
             margin-top: 12px;
+            letter-spacing: 0.5px;
         }
-        .tag-palestra { background: #e3f2fd; color: #1976d2; }
+        .tag-sessao { background: #e3f2fd; color: #1976d2; }
         .tag-minicurso { background: #f3e5f5; color: #7b1fa2; }
-        .tag-social { background: #fff3e0; color: #f57c00; }
+        .tag-social { background: #efebe9; color: #4e342e; }
+        .tag-abertura { background: #e8f5e9; color: #2e7d32; }
+        .tag-wrseg { background: #fff3e0; color: #e65100; }
 
         footer { 
             padding: 60px 20px 40px 20px; 
@@ -113,9 +140,7 @@
             font-weight: 700;
         }
         
-        .footer-parceiros h3:not(:first-child) {
-            margin-top: 35px;
-        }
+        .footer-parceiros h3:not(:first-child) { margin-top: 35px; }
 
         .grid-parceiros {
             display: flex;
@@ -153,11 +178,13 @@
             .item-cronograma { grid-template-columns: 1fr; }
             .horario { 
                 justify-content: flex-start; 
-                padding: 10px 20px; 
+                padding: 12px 20px; 
                 background: #e9eff5; 
-                font-size: 0.9rem;
+                font-size: 0.95rem;
+                border-right: none;
+                border-bottom: 1px solid #e2e8f0;
             }
-            .detalhes { padding: 15px 20px; }
+            .detalhes { padding: 20px; }
             .banner h1 { font-size: 1.8rem; }
             .grid-parceiros { gap: 25px; }
             .logo-parceiro { max-height: 45px; }
@@ -181,54 +208,231 @@
 
     <section class="banner">
         <h1>Cronograma do Evento</h1>
-        <p>Palestras, minicursos e oficinas do ERRC 2026.</p>
+        <p>Confira a distribuição de atividades, palestras e minicursos do ERRC 2026.</p>
     </section>
 
     <main>
         <div class="dia-seletor" id="botoes-dias">
-            <button class="dia-btn active">Dia 01</button>
-            <button class="dia-btn">Dia 02</button>
-            <button class="dia-btn">Dia 03</button>
+            <button class="dia-btn active" data-dia="quarta">21/10 - Quarta-feira</button>
+            <button class="dia-btn" data-dia="quinta">22/10 - Quinta-feira</button>
+            <button class="dia-btn" data-dia="sexta">23/10 - Sexta-feira</button>
         </div>
 
-        <div class="cronograma-container">
+        <div id="quarta" class="cronograma-dia active">
+            <div class="cronograma-container">
+                <div class="item-cronograma">
+                    <div class="horario">08:00 – 08:30</div>
+                    <div class="detalhes">
+                        <h3>Credenciamento</h3>
+                        <p>Recepção, identificação dos inscritos e entrega de materiais do evento.</p>
+                        <span class="tipo-tag tag-social">Social</span>
+                    </div>
+                </div>
+                
+                <div class="item-cronograma">
+                    <div class="horario">08:30 – 09:00</div>
+                    <div class="detalhes">
+                        <span class="local">Auditório CTISM</span>
+                        <h3>Cerimônia de Abertura</h3>
+                        <p>Boas-vindas institucionais e abertura formal da 24ª Edição do ERRC.</p>
+                        <span class="tipo-tag tag-abertura">Abertura</span>
+                    </div>
+                </div>
 
-            <div class="item-cronograma">
-                <div class="horario">08:00 - 09:00</div>
-                <div class="detalhes">
-                    <h3>Credenciamento e Coffee</h3>
-                    <p>Recepção dos participantes e entrega de kits.</p>
-                    <span class="tipo-tag tag-social">Social</span>
+                <div class="item-cronograma">
+                    <div class="horario">09:30 – 10:30</div>
+                    <div class="detalhes">
+                        <span class="local">Auditório CTISM</span>
+                        <h3>Palestra de Abertura</h3>
+                        <p>Sessão magna de abertura abordando grandes direções tecnológicas da computação atual.</p>
+                        <span class="tipo-tag tag-sessao">Sessão Plenária</span>
+                    </div>
+                </div>
+
+                <div class="item-cronograma">
+                    <div class="horario">10:30 – 11:00</div>
+                    <div class="detalhes">
+                        <h3>Coffee Break</h3>
+                        <p>Intervalo para descanso e integração entre os participantes.</p>
+                        <span class="tipo-tag tag-social">Social</span>
+                    </div>
+                </div>
+
+                <div class="item-cronograma">
+                    <div class="horario">12:00 – 14:00</div>
+                    <div class="detalhes">
+                        <h3>Almoço - Intervalo</h3>
+                        <p>Pausa livre reservada para almoço da comunidade e palestrantes.</p>
+                        <span class="tipo-tag tag-social">Intervalo</span>
+                    </div>
+                </div>
+
+                <div class="item-cronograma">
+                    <div class="horario">14:00 – 15:30</div>
+                    <div class="detalhes">
+                        <div class="sub-atividade">
+                            <span class="local">Auditório CTISM</span>
+                            <h3>Palestra 1</h3>
+                            <p>Discussão técnica e teórica sobre tópicos emergentes de redes.</p>
+                        </div>
+                        <div class="sub-atividade">
+                            <span class="local">Auditório INPE</span>
+                            <h3>Palestra 2</h3>
+                            <p>Sessão paralela de debate científico focado em sistemas distribuídos.</p>
+                        </div>
+                        <span class="tipo-tag tag-sessao">Atividades Paralelas</span>
+                    </div>
+                </div>
+
+                <div class="item-cronograma">
+                    <div class="horario">15:30 – 16:00</div>
+                    <div class="detalhes">
+                        <h3>Coffee Break</h3>
+                        <p>Espaço para recarga de energias e fomento de networking.</p>
+                        <span class="tipo-tag tag-social">Social</span>
+                    </div>
+                </div>
+
+                <div class="item-cronograma">
+                    <div class="horario">16:00 – 18:30</div>
+                    <div class="detalhes">
+                        <h3>Minicursos</h3>
+                        <p>Sessões práticas voltadas para capacitação técnica imediata.</p>
+                        <span class="tipo-tag tag-minicurso">Minicurso</span>
+                    </div>
                 </div>
             </div>
-            
-            <div class="item-cronograma">
-                <div class="horario">09:00 - 10:30</div>
-                <div class="detalhes">
-                    <h3>Cerimônia de Abertura</h3>
-                    <span class="palestrante">Comitê Organizador e Reitoria UFSM</span>
-                    <p>Boas-vindas oficial aos participantes da edição 2026.</p>
-                    <span class="tipo-tag tag-palestra">Palestra</span>
+        </div>
+
+        <div id="quinta" class="cronograma-dia">
+            <div class="cronograma-container">
+                <div class="item-cronograma">
+                    <div class="horario">08:30 – 10:00</div>
+                    <div class="detalhes">
+                        <div class="sub-atividade">
+                            <h3>(ERRC) Seção Técnica</h3>
+                            <p>Apresentação oral e debate dos artigos acadêmicos aceitos pelo comitê.</p>
+                        </div>
+                        <div class="sub-atividade">
+                            <h3>WRSeg - Palestra 3</h3>
+                            <p>Palestra dedicada ao Workshop de Segurança em Sistemas Computacionais.</p>
+                        </div>
+                        <span class="tipo-tag tag-wrseg">ERRC / WRSeg</span>
+                    </div>
+                </div>
+
+                <div class="item-cronograma">
+                    <div class="horario">10:00 – 10:30</div>
+                    <div class="detalhes">
+                        <h3>Coffee Break</h3>
+                        <p>Momento de confraternização dos autores e convidados do dia.</p>
+                        <span class="tipo-tag tag-social">Social</span>
+                    </div>
+                </div>
+
+                <div class="item-cronograma">
+                    <div class="horario">10:30 – 12:00</div>
+                    <div class="detalhes">
+                        <div class="sub-atividade">
+                            <h3>(ERRC) Seção Técnica</h3>
+                            <p>Segunda trilha matinal de apresentações de artigos aprovados.</p>
+                        </div>
+                        <div class="sub-atividade">
+                            <h3>WRSeg - Seção Técnica</h3>
+                            <p>Sessão de apresentação de trabalhos selecionados voltados à Segurança.</p>
+                        </div>
+                        <span class="tipo-tag tag-wrseg">Apresentações Técnicas</span>
+                    </div>
+                </div>
+
+                <div class="item-cronograma">
+                    <div class="horario">12:00 – 14:00</div>
+                    <div class="detalhes">
+                        <h3>Almoço - Intervalo</h3>
+                        <p>Pausa de almoço para recompor energias.</p>
+                        <span class="tipo-tag tag-social">Intervalo</span>
+                    </div>
+                </div>
+
+                <div class="item-cronograma">
+                    <div class="horario">14:00 – 17:00</div>
+                    <div class="detalhes">
+                        <h3>(ERRC) - Seção Técnica</h3>
+                        <p>Apresentação continuada das sessões técnicas de artigos originais na parte da tarde.</p>
+                        <span class="tipo-tag tag-sessao">Sessão Técnica Principal</span>
+                    </div>
+                </div>
+
+                <div class="item-cronograma">
+                    <div class="horario">14:00 – 15:00</div>
+                    <div class="detalhes">
+                        <div class="sub-atividade">
+                            <span class="local">Auditório CTISM</span>
+                            <h3>Palestra 4</h3>
+                            <p>Sessão dedicada às inovações no ecossistema de redes industriais.</p>
+                        </div>
+                        <div class="sub-atividade">
+                            <h3>Oficina 1</h3>
+                            <p>Práticas ativas e dinâmicas tecnológicas simultâneas.</p>
+                        </div>
+                        <span class="tipo-tag tag-minicurso">Sessões Paralelas</span>
+                    </div>
+                </div>
+
+                <div class="item-cronograma">
+                    <div class="horario">15:00 – 15:30</div>
+                    <div class="detalhes">
+                        <h3>Coffee Break</h3>
+                        <p>Intervalo vespertino de networking.</p>
+                        <span class="tipo-tag tag-social">Social</span>
+                    </div>
+                </div>
+
+                <div class="item-cronograma">
+                    <div class="horario">15:30 – 16:30</div>
+                    <div class="detalhes">
+                        <div class="sub-atividade">
+                            <span class="local">Auditório CTISM</span>
+                            <h3>Palestra 5</h3>
+                            <p>Palestra de encerramento das trilhas de convidados da tarde.</p>
+                        </div>
+                        <div class="sub-atividade">
+                            <h3>Oficina 2</h3>
+                            <p>Segunda etapa do bloco técnico aplicado.</p>
+                        </div>
+                        <span class="tipo-tag tag-minicurso">Paralelas da Tarde</span>
+                    </div>
                 </div>
             </div>
+        </div>
 
-            <div class="item-cronograma">
-                <div class="horario">10:30 - 12:00</div>
-                <div class="detalhes">
-                    <h3>O Futuro das Redes 6G e IoT</h3>
-                    <span class="palestrante">Dr. Convidado Especial</span>
-                    <p>Exploração das novas fronteiras em conectividade de baixa latência.</p>
-                    <span class="tipo-tag tag-palestra">Keynote</span>
+        <div id="sexta" class="cronograma-dia">
+            <div class="cronograma-container">
+                <div class="item-cronograma">
+                    <div class="horario">08:30 – 09:30</div>
+                    <div class="detalhes">
+                        <h3>Palestra 6</h3>
+                        <p>Última palestra oficial trazendo consolidações e perspectivas futuras de conectividade.</p>
+                        <span class="tipo-tag tag-sessao">Keynote Final</span>
+                    </div>
                 </div>
-            </div>
 
-            <div class="item-cronograma">
-                <div class="horario">13:30 - 17:30</div>
-                <div class="detalhes">
-                    <h3>Segurança em Ambientes Cloud</h3>
-                    <span class="palestrante">Prof. Especialista em Redes</span>
-                    <p>Minicurso prático sobre segurança em nuvem. Traga seu notebook.</p>
-                    <span class="tipo-tag tag-minicurso">Minicurso</span>
+                <div class="item-cronograma">
+                    <div class="horario">09:30 - 10:30</div>
+                    <div class="detalhes">
+                        <h3>Encerramento</h3>
+                        <p>Considerações finais, premiações de melhores artigos e fechamento do ERRC 2026.</p>
+                        <span class="tipo-tag tag-abertura">Sessão de Encerramento</span>
+                    </div>
+                </div>
+
+                <div class="item-cronograma">
+                    <div class="horario">10:00 – 15:30</div>
+                    <div class="detalhes">
+                        <h3>Confraternização do Evento</h3>
+                        <p>Espaço de convívio social informal, ideal para fechamento de acordos e parcerias.</p>
+                        <span class="tipo-tag tag-social">Social</span>
+                    </div>
                 </div>
             </div>
         </div>
@@ -236,16 +440,42 @@
 
     <footer>
         <div class="footer-parceiros">
-            <h3>Realização e Organização</h3>
+            <h3>Realização</h3>
             <div class="grid-parceiros">
-                <img class="logo-parceiro" src="https://sbbd.org.br/2023/wp-content/uploads/sites/16/2023/09/logo-sbc.png" alt="Logo SBC">
-                <img class="logo-parceiro" src="https://iconape.com/wp-content/png_logo_vector/ufsm-logo.png" alt="Logo UFSM">
-                <img class="logo-parceiro" src="https://www.ufsm.br/app/uploads/sites/360/2022/08/CTISM_vertical_cor-768x768.png" alt="Logo CTISM">
+                <img class="logo-parceiro" src="https://via.placeholder.com/150x60?text=SBC" alt="Logo SBC">
+                <img class="logo-parceiro" src="https://via.placeholder.com/150x60?text=UFSM" alt="Logo UFSM">
+                <img class="logo-parceiro" src="https://www.inf.ufrgs.br/errc2023/wp-content/uploads/2023/07/01-CTISM_color_pequeno-291x300.png" alt="Logo CTISM">
             </div>
+        </div>
+
         <div class="footer-info">
             <p>&copy; 2026 ERRC - Escola Regional de Redes de Computadores.</p>
             <p style="font-size: 0.8rem; margin-top: 12px; opacity: 0.5;">Promovido por Sociedade Brasileira de Computação (SBC)</p>
         </div>
     </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const botoes = document.querySelectorAll('.dia-btn');
+            const conteudosDias = document.querySelectorAll('.cronograma-dia');
+
+            botoes.forEach(botao => {
+                botao.addEventListener('click', function() {
+                   
+                    botoes.forEach(btn => btn.classList.remove('active'));
+                    
+                    this.classList.add('active');
+
+                    const diaAlvo = this.getAttribute('data-dia');
+
+                    conteudosDias.forEach(conteudo => {
+                        conteudo.classList.remove('active');
+                    });
+
+                    document.getElementById(diaAlvo).classList.add('active');
+                });
+            });
+        });
+    </script>
 </body>
 </html>
