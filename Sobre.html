@@ -4,9 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ERRC 2026 - Sobre a Escola Regional de Redes de Computadores</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
     <style>
-
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: 'Inter', sans-serif; line-height: 1.6; color: #333; background-color: #f4f7f6; }
         html { scroll-behavior: smooth; }
@@ -37,7 +36,7 @@
             background: linear-gradient(135deg, #04294f 0%, #1a5c9e 100%); 
             color: white; 
         }
-        .banner h1 { font-size: 3.5rem; margin-bottom: 15px; line-height: 1.1; }
+        .banner h1 { font-size: 3.5rem; margin-bottom: 15px; line-height: 1.1; font-weight: 800; }
         .banner p { font-size: 1.2rem; margin-bottom: 30px; opacity: 0.9; max-width: 800px; margin-left: auto; margin-right: auto; }
         .banner .cta-button { 
             display: inline-block; 
@@ -52,17 +51,17 @@
         }
         .banner .cta-button:hover { transform: translateY(-3px); background: #f0f0f0; }
 
-
         main { padding: 60px 10%; max-width: 1200px; margin: auto; }
         
-        .intro-text { text-align: center; margin-bottom: 60px; }
-        .intro-text h2 { font-size: 2.5rem; color: #04294f; margin-bottom: 20px; }
-        .intro-text p { font-size: 1.1rem; color: #666; max-width: 800px; margin: auto; }
+        .secao-sobre { margin-bottom: 60px; }
+        .secao-sobre h2 { font-size: 2.5rem; color: #04294f; margin-bottom: 25px; border-bottom: 3px solid #3a71c4; display: inline-block; padding-bottom: 5px; }
+        .secao-sobre p { font-size: 1.1rem; color: #444; margin-bottom: 20px; text-align: justify; }
 
         .grid-topics { 
             display: grid; 
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
             gap: 30px; 
+            margin-bottom: 80px;
         }
         .card { 
             padding: 30px; 
@@ -75,11 +74,38 @@
         .card:hover { transform: translateY(-10px); box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
         .card h3 { margin-bottom: 15px; color: #1a5c9e; font-size: 1.4rem; }
 
+        .bloco-info {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center;
+            margin-bottom: 60px;
+        }
+        .bloco-info.invertido {
+            grid-template-columns: 1fr 1fr;
+        }
+        .bloco-info-texto h3 { font-size: 1.8rem; color: #04294f; margin-bottom: 15px; }
+        .bloco-info-texto p { font-size: 1.05rem; color: #444; text-align: justify; margin-bottom: 15px; }
+        .bloco-info-imagem img {
+            width: 100%;
+            height: auto;
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+            display: block;
+        }
+        .legenda-imagem {
+            font-size: 0.85rem;
+            color: #666;
+            margin-top: 10px;
+            text-align: center;
+            font-style: italic;
+        }
+
         footer { 
             padding: 60px 20px 40px 20px; 
             background: #04294f; 
             color: white; 
-            margin-top: 60px; 
+            margin-top: 80px; 
             font-size: 0.95rem;
             text-align: center;
         }
@@ -99,10 +125,6 @@
             margin-bottom: 20px;
             font-weight: 700;
         }
-        
-        .footer-parceiros h3:not(:first-child) {
-            margin-top: 35px;
-        }
 
         .grid-parceiros {
             display: flex;
@@ -113,15 +135,9 @@
         }
         
         .logo-parceiro {
-            max-height: 55px;
+            max-height: 95px;
             width: auto;
-            filter: brightness(0) invert(1) opacity(0.7);
-            transition: 0.3s;
-        }
-        
-        .logo-parceiro:hover {
-            filter: none; 
-            opacity: 1;
+            background: transparent;
         }
 
         .footer-info p { opacity: 0.8; margin-bottom: 6px; }
@@ -130,28 +146,18 @@
         @media (max-width: 900px) {
             header { padding: 1.5rem 5%; }
             main { padding: 40px 5%; }
+            .bloco-info { grid-template-columns: 1fr !important; gap: 25px; }
+            .bloco-info.invertido .bloco-info-imagem { grid-row: 1; }
         }
 
         @media (max-width: 768px) {
-            header { 
-                flex-direction: column; 
-                text-align: center;
-            }
-            nav { 
-                margin-top: 20px; 
-                display: flex; 
-                flex-wrap: wrap; 
-                justify-content: center; 
-            }
-            nav a { 
-                margin: 5px; 
-                font-size: 0.9rem;
-            }
+            header { flex-direction: column; text-align: center; }
+            nav { margin-top: 20px; display: flex; flex-wrap: wrap; justify-content: center; }
+            nav a { margin: 5px; font-size: 0.9rem; }
             .banner h1 { font-size: 2.2rem; }
             .banner p { font-size: 1rem; }
-            .intro-text h2 { font-size: 1.8rem; }
             .grid-parceiros { gap: 25px; }
-            .logo-parceiro { max-height: 45px; }
+            .logo-parceiro { max-height: 65px; }
         }
     </style>
 </head>
@@ -177,23 +183,56 @@
     </section>
 
     <main>
-        <section class="intro-text">
+        <section class="secao-sobre">
             <h2>Sobre o Evento</h2>
-            <p>Promovida pela Sociedade Brasileira de Computação (SBC), a ERRC visa integrar comunidades acadêmicas e industriais.</p>
+            <p>
+                Promovida anualmente pela <strong>Sociedade Brasileira de Computação (SBC)</strong>, a ERRC consolidou-se, ao longo de mais de duas décadas, como um dos pilares mais importantes para o desenvolvimento tecnológico e científico da Região Sul do Brasil. O evento funciona como uma plataforma itinerante que conecta de forma orgânica o ecossistema acadêmico ao setor produtivo.
+            </p>
+            <p>
+                Além de descentralizar o debate sobre alta tecnologia levando discussões de nível internacional para diferentes polos universitários, a escola desempenha um papel estratégico na retenção de talentos e no estímulo à pesquisa regional. É o espaço ideal para que novos pesquisadores publiquem seus trabalhos e recebam feedbacks valiosos de profissionais seniores da área.
+            </p>
         </section>
 
         <section class="grid-topics">
             <div class="card">
                 <h3>Difusão Científica</h3>
-                <p>Apresentação de artigos selecionados e discussões sobre as últimas tendências em infraestrutura de redes.</p>
+                <p>Apresentação de artigos selecionados por debates profundos sobre as últimas tendências em infraestrutura, nuvem, IoT e segurança cibernética.</p>
             </div>
             <div class="card">
                 <h3>Formação Ativa</h3>
-                <p>Minicursos de curta duração que capacitam estudantes e profissionais em tecnologias emergentes.</p>
+                <p>Minicursos práticos de curta e média duração focados em ferramentas, linguagens e metodologias emergentes demandadas pelo mercado de trabalho.</p>
             </div>
             <div class="card">
                 <h3>Interação Regional</h3>
-                <p>Troca de experiências entre universidades e empresas de tecnologia do RS.</p>
+                <p>Espaço voltado a painéis, palestras e networking que aproximam universidades, agências de fomento, provedores e grandes indústrias de TI.</p>
+            </div>
+        </section>
+
+        <section class="secao-sobre">
+            <h2>Sede de 2026: Santa Maria, RS</h2>
+
+            <div class="bloco-info invertido" style="direction: rtl;">
+                <div class="bloco-info-texto" style="direction: ltr;">
+                    <h3>O Colégio Técnico Industrial (CTISM)</h3>
+                    <p>Criado em 1967 e integrado à estrutura da UFSM, o CTISM é uma das instituições de ensino técnico e tecnológico mais tradicionais e respeitadas do estado. O colégio fundamenta-se no princípio do "aprender fazendo", fornecendo bases práticas excepcionais para o mercado.</p>
+                    <p>Com um forte DNA voltado à inovação e desenvolvimento de projetos de extensão, o CTISM atua como o anfitrião ideal para a 23ª edição da ERRC, abrindo suas portas para discussões de infraestrutura, redes e sistemas digitais.</p>
+                </div>
+                <div class="bloco-info-imagem" style="direction: ltr;">
+                    <img src="https://www.ufsm.br/app/uploads/sites/360/2021/04/Predio_Administrativo_CTISM-1024x681.jpg" alt="Prédio do CTISM">
+                    <p class="legenda-imagem">Fachada administrativa do CTISM, aliando tradição de ensino técnico a metodologias inovadoras.</p>
+                </div>
+            </div>
+            
+            <div class="bloco-info">
+                <div class="bloco-info-texto">
+                    <h3>A Universidade Federal de Santa Maria</h3>
+                    <p>Fundada em 1960 pelo Professor Mariano da Rocha Filho, a UFSM tem um significado histórico pioneiro: foi a primeira universidade federal criada no interior do Brasil, descentralizando o acesso ao ensino superior público e de excelência.</p>
+                    <p>Seu campus sede, localizado no bairro Camobi, estrutura-se como uma verdadeira "cidade universitária", unindo modernos laboratórios de pesquisa em computação e engenharia a uma vasta e acolhedora área arborizada, ideal para a integração de estudantes e pesquisadores.</p>
+                </div>
+                <div class="bloco-info-imagem">
+                    <img src="https://www.ufsm.br/app/uploads/sites/360/2020/02/Campus-UFSM_foto-Pantaleao-1024x683.jpg" alt="Campus da UFSM">
+                    <p class="legenda-imagem">O dinâmico campus da UFSM em Camobi, conhecido por sua grande extensão e harmonia com a natureza.</p>
+                </div>
             </div>
         </section>
     </main>
@@ -208,9 +247,9 @@
             </div>
         </div>
         <div class="footer-info">
-            <p>&copy; 2026 ERRC - Escola Regional de Redes de Computadores.</p>
             <p>Organização: <strong>CTISM / UFSM</strong> - Santa Maria, RS</p>
-            <p style="font-size: 0.8rem; margin-top: 12px; opacity: 0.5;">Promovido por Sociedade Brasileira de Computação (SBC)</p>
+            <p style="font-size: 0.8rem; margin-bottom: 10px; opacity: 0.5;">Promovido por Sociedade Brasileira de Computação (SBC)</p>
+            <p>&copy; 2026 ERRC - Escola Regional de Redes de Computadores.</p>
         </div>
     </footer>
 
