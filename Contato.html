@@ -28,19 +28,22 @@
         .info-section h2 { color: #04294f; margin-bottom: 20px; font-size: 2rem; }
         .info-text { max-width: 800px; margin: 0 auto; text-align: justify; background: #fff; padding: 30px; border-radius: 15px; border-left: 5px solid #3a71c4; box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
 
-        .contact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-top: 40px; }
+        .contact-grid { display: flex; justify-content: center; margin-top: 40px; }
         
         .contact-card { 
-            padding: 30px; 
+            width: 100%;
+            max-width: 600px;
+            padding: 40px 30px; 
             border-radius: 15px; 
             background: white; 
             box-shadow: 0 10px 20px rgba(0,0,0,0.05);
             border: 1px solid #eee;
             text-align: center;
         }
-        .contact-card h3 { color: #04294f; margin-bottom: 15px; }
-        .contact-card p { font-size: 1.1rem; color: #555; }
-        .contact-card a { color: #3a71c4; text-decoration: none; font-weight: 600; }
+        .contact-card h3 { color: #04294f; margin-bottom: 15px; font-size: 1.5rem; }
+        .contact-card p { font-size: 1.1rem; color: #555; margin-bottom: 15px; }
+        .contact-card a { color: #3a71c4; text-decoration: none; font-weight: 600; transition: 0.3s; }
+        .contact-card a:hover { text-decoration: underline; }
 
         footer { 
             padding: 60px 20px 40px 20px; 
@@ -48,7 +51,6 @@
             color: white; 
             margin-top: 80px; 
             font-size: 0.95rem;
-            text-align: center;
         }
         
         .footer-parceiros {
@@ -56,6 +58,7 @@
             margin: 0 auto 40px auto;
             padding-bottom: 40px;
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
         }
         
         .footer-parceiros h3 {
@@ -66,18 +69,59 @@
             margin-bottom: 20px;
             font-weight: 700;
         }
-        
-        .footer-parceiros h3:not(:first-child) { margin-top: 35px; }
-        .grid-parceiros { display: flex; justify-content: center; align-items: center; flex-wrap: wrap; gap: 45px; }
+
+        .grid-parceiros {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 45px;
+        }
         
         .logo-parceiro {
-            max-height: 110px; 
+            max-height: 95px; 
             width: auto;
-            background: transparent; 
+            filter: grayscale(100%);
+            opacity: 0.7;
+            transition: 0.3s;
+        }
+        .logo-parceiro:hover {
+            filter: grayscale(0%);
+            opacity: 1;
         }
 
-        .footer-info p { opacity: 0.8; margin-bottom: 6px; }
-        .footer-info strong { opacity: 1; color: #3a71c4; }
+        .footer-info {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .footer-texto {
+            text-align: left;
+        }
+        .footer-texto p { opacity: 0.8; margin-bottom: 4px; }
+        .footer-texto p:last-child { margin-bottom: 0; }
+        .footer-texto strong { opacity: 1; color: #3a71c4; }
+
+        .instagram-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            color: rgba(255, 255, 255, 0.7);
+            transition: 0.3s ease;
+            text-decoration: none;
+        }
+        .instagram-link svg {
+            width: 32px;
+            height: 32px;
+            fill: currentColor;
+        }
+        .instagram-link:hover {
+            color: #e1306c;
+            transform: scale(1.1);
+        }
 
         @media (max-width: 992px) {
             header { padding: 1.5rem 5%; }
@@ -90,10 +134,17 @@
             nav a { margin-left: 0; font-size: 0.85rem; }
             
             .banner h1 { font-size: 1.8rem; }
-            .info-text { padding: 20px; }
-            .info-section h2 { font-size: 1.6rem; }
             .grid-parceiros { gap: 25px; }
             .logo-parceiro { max-height: 65px; } 
+
+            .footer-info {
+                flex-direction: column;
+                gap: 20px;
+                text-align: center;
+            }
+            .footer-texto {
+                text-align: center;
+            }
         }
     </style>
 </head>
@@ -122,34 +173,35 @@
     <main>
         <section class="contact-grid">
             <div class="contact-card">
-                <h3>E-mail</h3>
-                <p>Para dúvidas acadêmicas ou suporte:</p>
-                <a href="mailto:#">---</a>
-            </div>
-
-            <div class="contact-card">
-                <h3>Telefone / WhatsApp</h3>
-                <p>Atendimento direto:</p>
-                <a href="https://wa.me/#" target="_blank">---</a>
+                <h3>Atendimento Geral</h3>
+                <p>Para dúvidas acadêmicas, inscrições ou suporte, envie um e-mail para:</p>
+                <p><a href="mailto:sceolin@redes.ufsm.br">sceolin@redes.ufsm.br</a></p>
+                <p style="font-size: 0.95rem; color: #666; margin-top: 20px;">Você também pode entrar em contato diretamente enviando uma mensagem via direct através do nosso Instagram oficial.</p>
             </div>
         </section>
     </main>
 
-      <footer>
+    <footer>
         <div class="footer-parceiros">
+            <h3>Realização</h3>
             <div class="grid-parceiros">
-                <img class="logo-parceiro" src="sbc_logo.png" alt="Logo SBC">
                 <img class="logo-parceiro" src="https://www.ufsm.br/app/themes/ufsm/images/brasao.svg" alt="Logo UFSM">
-                <img class="logo-parceiro" src="ctism_logo.png" alt="Logo CTISM">
+                <img class="logo-parceiro" src="imagens/ctism_logo.png" alt="Logo CTISM">
             </div>
         </div>
-
+        
         <div class="footer-info">
-            <p>Organização: <strong>CTISM / UFSM</strong> - Santa Maria, RS</p>
-            <p>&copy; 2026 ERRC - Escola Regional de Redes de Computadores.</p>
-            <p style="font-size: 0.8rem; margin-top: 10px; opacity: 0.5;">Promovido pela Sociedade Brasileira de Computação (SBC)</p>
+            <div class="footer-texto">
+                <p>Organização: <strong>CTISM / UFSM</strong> - Santa Maria, RS</p>
+                <p>&copy; 2026 ERRC - Escola Regional de Redes de Computadores.</p>
+            </div>
+            
+            <a href="https://www.instagram.com/errc_escoladeredes?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" class="instagram-link" aria-label="Instagram do Evento">
+                <svg viewBox="0 0 24 24">
+                    <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.051.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/>
+                </svg>
+            </a>
         </div>
     </footer>
-
 </body>
 </html>
