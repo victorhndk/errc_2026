@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ERRC 2026 - 23ª Edição da Escola Regional de Redes de Computadores</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: 'Inter', sans-serif; line-height: 1.6; color: #333; background-color: #f4f7f6; }
@@ -38,9 +39,39 @@
         .logo img:hover {
             transform: scale(1.03); 
         }
+
+        .nav-container {
+            display: flex;
+            align-items: center;
+        }
+
         nav a { color: white; text-decoration: none; margin-left: 25px; font-weight: 600; transition: 0.3s; padding: 5px 10px; border-radius: 4px;}
         nav a:hover { background: #3a71c4; }
         
+        .linkedin-header-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: #0077b5;
+            color: white;
+            text-decoration: none;
+            padding: 6px 12px;
+            border-radius: 4px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-left: 25px;
+            transition: 0.3s ease;
+        }
+        .linkedin-header-btn:hover {
+            background: #005a8a;
+            transform: translateY(-1px);
+        }
+        .linkedin-header-btn svg {
+            width: 16px;
+            height: 16px;
+            fill: currentColor;
+        }
+
         .banner { 
             text-align: center; 
             padding: 120px 20px; 
@@ -67,6 +98,96 @@
         .banner a:hover { transform: translateY(-3px); background: #2e5fa7; box-shadow: 0 6px 20px rgba(0,0,0,0.3); }
 
         main { padding: 60px 10%; max-width: 1200px; margin: auto; }
+
+        .mural-novidades {
+            background: #ffffff;
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 50px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+            border-left: 6px solid #3a71c4;
+        }
+
+        .mural-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #f0f0f0;
+            padding-bottom: 10px;
+        }
+
+        .mural-header h2 {
+            color: #04294f;
+            font-size: 1.6rem;
+            font-weight: 800;
+            margin: 0;
+            border: none;
+            padding: 0;
+        }
+
+        .badge-novo {
+            background: #d97706;
+            color: white;
+            font-size: 0.75rem;
+            font-weight: 800;
+            padding: 4px 10px;
+            border-radius: 20px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .card-novidade {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .card-novidade:last-child {
+            margin-bottom: 0;
+        }
+
+        .card-novidade h3 {
+            color: #1a5c9e;
+            font-size: 1.25rem;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .card-novidade p {
+            font-size: 1rem;
+            color: #444;
+            margin-bottom: 18px;
+            line-height: 1.6;
+        }
+
+        .btn-download {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: #04294f;
+            color: white;
+            padding: 10px 22px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.95rem;
+            transition: 0.3s ease;
+        }
+
+        .btn-download:hover {
+            background: #3a71c4;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(58, 113, 196, 0.3);
+        }
+
+        .btn-download svg {
+            width: 18px;
+            height: 18px;
+            fill: currentColor;
+        }
 
         .conteudo-principal {
             display: grid;
@@ -136,18 +257,19 @@
             color: #555;
             text-transform: uppercase;
             letter-spacing: 1px;
-            margin: 25px 0 15px 0;
+            margin: 30px 0 15px 0;
         }
         .grid-parceiros {
             display: flex;
             justify-content: center;
             align-items: center;
             flex-wrap: wrap;
-            gap: 45px;
-            margin-bottom: 20px;
+            gap: 40px;
+            margin-bottom: 30px;
         }
+
         .logo-parceiro {
-            max-height: 95px; 
+            height: 95px; 
             width: auto;
             filter: grayscale(100%);
             opacity: 0.7;
@@ -158,78 +280,167 @@
             opacity: 1;
         }
 
+        .logo-diamante {
+            height: 150px;
+            width: auto;
+            filter: grayscale(100%);
+            opacity: 0.9;
+            transition: 0.3s;
+        }
+        .logo-diamante:hover { filter: grayscale(0%); opacity: 1; }
+
+        .logo-ouro {
+            height: 125px;
+            width: auto;
+            filter: grayscale(100%);
+            opacity: 0.85;
+            transition: 0.3s;
+        }
+        .logo-ouro:hover { filter: grayscale(0%); opacity: 1; }
+
+        .logo-prata {
+            height: 100px; 
+            width: auto;
+            filter: grayscale(100%);
+            opacity: 0.8;
+            transition: 0.3s;
+        }
+        .logo-prata:hover { filter: grayscale(0%); opacity: 1; }
+
+        .logo-bronze {
+            height: 80px;
+            width: auto;
+            filter: grayscale(100%);
+            opacity: 0.75;
+            transition: 0.3s;
+        }
+        .logo-bronze:hover { filter: grayscale(0%); opacity: 1; }
+
+        .logo-org {
+            height: 190px; 
+            width: auto;
+            filter: grayscale(100%);
+            opacity: 0.7;
+            transition: 0.3s;
+        }
+        .logo-org:hover {
+            filter: grayscale(0%);
+            opacity: 1;
+        }
+        .logo-re {
+            height: 170px; 
+            width: auto;
+            filter: grayscale(100%);
+            opacity: 0.7;
+            transition: 0.3s;
+        }
+        .logo-re:hover {
+            filter: grayscale(0%);
+            opacity: 1;
+        }
+
         footer { 
-            padding: 60px 20px 40px 20px; 
+            padding: 50px 10% 30px 10%; 
             background: #04294f; 
             color: white; 
             margin-top: 60px; 
-            font-size: 0.95rem;
+            font-size: 0.9rem;
         }
         
-        .footer-parceiros {
+        .footer-container {
             max-width: 1200px;
-            margin: 0 auto 40px auto;
-            padding-bottom: 40px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            margin: 0 auto;
             display: flex;
             justify-content: space-between;
-            align-items: flex-start;
-            gap: 40px;
+            align-items: flex-start; 
+            gap: 30px;
         }
 
         .footer-coluna {
             flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
             text-align: center;
+            padding: 0 15px;
         }
 
-        .footer-coluna-realizacao {
-            border-right: 1px solid rgba(255, 255, 255, 0.1); 
-            padding-right: 40px;
+        .footer-coluna:not(:last-child) {
+            border-right: 1px solid rgba(255, 255, 255, 0.15);
         }
         
-        .footer-parceiros h3 {
-            font-size: 1rem;
+        footer h3 {
+            font-size: 0.95rem;
             color: #3a71c4;
             text-transform: uppercase;
             letter-spacing: 1.5px;
-            margin-bottom: 25px;
+            margin-bottom: 20px;
             font-weight: 700;
+            width: 100%;
         }
 
-        .footer-info {
-            max-width: 600px;
-            margin: 0 auto;
+        .footer-coluna p {
+            opacity: 0.85;
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+            line-height: 1.5;
+        }
+
+        .footer-coluna a {
+            color: #3a71c4;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        .footer-coluna a:hover {
+            text-decoration: underline;
+        }
+
+        .logos-lado-a-lado {
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 30px; 
-            text-align: center;
+            gap: 20px;
+            width: 100%;
+            margin-top: 5px;
+        }
+
+        .logo-footer-remoto {
+            max-height: 125px; 
+            width: auto;
+            opacity: 0.8;
+            transition: 0.3s;
         }
         
-        .footer-texto {
-            text-align: center;
+        .logo-footer-remoto:hover {
+            opacity: 1;
         }
-        .footer-texto p { opacity: 0.8; margin-bottom: 4px; }
-        .footer-texto p:last-child { margin-bottom: 0; }
-        .footer-texto strong { opacity: 1; color: #3a71c4; }
 
         .instagram-link {
+            margin-top: 15px;
             display: inline-flex;
             align-items: center;
             justify-content: center;
             color: rgba(255, 255, 255, 0.7);
             transition: 0.3s ease;
-            text-decoration: none;
-            flex-shrink: 0;
         }
         .instagram-link svg {
-            width: 36px;
-            height: 36px;
+            width: 32px;
+            height: 32px;
             fill: currentColor;
         }
         .instagram-link:hover {
             color: #e1306c; 
             transform: scale(1.1);
+        }
+
+        .footer-copyright {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            font-size: 0.8rem;
+            opacity: 0.6;
+            width: 100%;
         }
 
         @media (max-width: 992px) {
@@ -242,32 +453,31 @@
             header { flex-direction: column; text-align: center; padding: 1.5rem 20px; }
             .logo { margin-bottom: 15px; }
             .logo img { max-height: 90px; } 
+            
+            .nav-container {
+                flex-direction: column;
+                gap: 15px;
+                width: 100%;
+            }
             nav { display: flex; flex-wrap: wrap; justify-content: center; gap: 5px; }
             nav a { margin-left: 0; font-size: 0.9rem; padding: 5px 8px; }
+            .linkedin-header-btn { margin-left: 0; }
             
             .banner h1 { font-size: 2.2rem; }
             .banner p { font-size: 1rem; }
             .grid-parceiros { gap: 25px; }
-            .logo-parceiro { max-height: 65px; } 
             
-            .footer-parceiros {
+            .footer-container {
                 flex-direction: column;
                 gap: 40px;
             }
-            .footer-coluna-realizacao {
-                border-right: none;
-                border-bottom: 1px solid rgba(255, 255, 255, 0.1); 
-                padding-right: 0;
-                padding-bottom: 40px;
-                width: 100%;
-            }
             .footer-coluna {
                 width: 100%;
+                padding: 0 0 30px 0;
             }
-
-            .footer-info {
-                flex-direction: column-reverse;
-                gap: 20px;
+            .footer-coluna:not(:last-child) {
+                border-right: none;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.15);
             }
         }
     </style>
@@ -277,30 +487,84 @@
     <header>
         <div class="logo">
             <a href="index.html">
-                <img src="imagens/logo_errc_2026.png" alt="Logo ERRC 2026">
+                <img src="assets/img/logo_errc_2026.png" alt="Logo ERRC 2026">
             </a>
         </div>
-        <nav aria-label="Menu Principal">
-            <a href="index.html" style="background: #3a71c4;">Início</a>
-            <a href="Sobre.html">Sobre</a>
-            <a href="Localizacao.html">Localização</a>
-            <a href="Programacao.html">Programação</a>
-            <a href="Inscricoes.html">Inscrições</a>
-            <a href="Organizacao.html">Organização</a>
-            <a href="Contato.html">Contato</a>
-        </nav>
+        <div class="nav-container">
+            <nav aria-label="Menu Principal">
+                <a href="Sobre.html">Sobre</a>
+                <a href="Localizacao.html">Localização</a>
+                <a href="Programacao.html">Programação</a>
+                <a href="Inscricoes.html">Inscrições</a>
+                <a href="Chamada.html">Chamada p/ Trabalhos</a>
+                <a href="Organizacao.html">Organização</a>
+            </nav>
+            <a href="https://linkedin.com/company/escoladeredes-errc/" target="_blank" class="linkedin-header-btn" aria-label="LinkedIn da ERRC">
+                <svg viewBox="0 0 24 24">
+                    <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                </svg>
+                LinkedIn
+            </a>
+        </div>
     </header>
 
     <section class="banner" id="inicio">
         <div class="edicao">23ª Edição</div>
         <h1>Escola Regional de Redes de Computadores</h1>
         <p>O principal ponto de encontro da comunidade de redes e sistemas distribuídos da Região Sul.</p>
-        <div class="info-evento">📅 Outubro de 2026 | 📍 CTISM / UFSM - Santa Maria, RS</div>
+        <div class="info-evento">📅 21 a 22 de Outubro de 2026 | 📍 CTISM / UFSM - Santa Maria, RS</div>
         <br>
         <a href="Inscricoes.html">Inscreva-se no Evento</a>
     </section>
 
     <main>
+        <section class="mural-novidades">
+            <div class="mural-header">
+                <h2>Mural de Novidades</h2>
+                <span class="badge-novo">Novo</span>
+            </div>
+
+            <!-- Chamada para Submissão de Artigos -->
+            <div class="card-novidade">
+                <h3>A Chamada para Submissão de Artigos foi prorrogada!</h3>
+                <p>
+                    Convidamos pesquisadores, estudantes e profissionais a submeterem seus artigos científicos para a 23ª edição da ERRC. Os trabalhos aceitos serão apresentados nas Sessões Técnicas do evento. O prazo final para submissão é até <strong>21 de setembro de 2026</strong>.
+                </p>
+                <a href="Chamada.html" class="btn-download">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/>
+                    </svg>
+                    Instruções e Submissão de Artigos
+                </a>
+            </div>
+            <!-- Inscrições para o Evento (ERRC 2026) -->
+            <div class="card-novidade">
+                <h3>Inscrições para ERRC 2026 estão abertas; Garanta a sua já!</h3>
+                <p>
+                    Estamos com as inscrições para a Escola Regional de Redes de Computadores já disponíveis! Estudantes de graduação e pós-graduação, professores e profissionais, façam a sua e ajudem a ERRC com o reconhecimento das áreas de Redes de Computadores, Cibersegurança e suas diversas subdivisões.
+                </p>
+                <a href="https://centraldesistemas.sbc.org.br/ecos/errc2026" target="_blank" class="btn-download">
+                   Inscreva-se na ERRC !
+                </a>
+                <p style="margin-top: 10px; font-size: 0.85rem; color: #666;">
+                    * Para mais informações, acesse a aba Inscrições no menu de opções da página ou por este <a href="Inscricoes.html">link</a>.
+                </p>
+            </div>
+            <!-- Chamada Pública para Minicursos -->
+            <div class="card-novidade">
+                <h3>Chamada Pública para Submissão de Propostas de Minicursos</h3>
+                <p>
+                    Estão abertas as submissões para propostas de minicursos para a ERRC 2026! Convidamos estudantes, pesquisadores, professores e profissionais da área a submeterem propostas de minicursos teóricos, práticos ou oficinas abordando temas em Redes de Computadores, Cibersegurança e áreas correlatas. O prazo final para submissão é até <strong>15 de setembro de 2026</strong>.
+                </p>
+                <a href="assets/Edital_Minicursos_ERRC_2026.pdf" target="_blank" class="btn-download">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zm2 16H8v-2h8v2zm0-4H8v-2h8v2zm-3-5V3.5L18.5 9H13z"/>
+                    </svg>
+                    Edital de Minicursos (PDF)
+                </a>
+            </div>
+        </section>
+
         <div class="conteudo-principal">
             <section class="apresentacao">
                 <h2>Apresentação</h2>
@@ -319,20 +583,20 @@
                 <h2>Datas Importantes</h2>
                 <div class="card-datas">
                     <div class="data-item">
-                        <div class="evento-data">Submissão de Artigos:</div>
-                        <div class="prazo-data">Precisamos decidir...</div>
+                        <div class="riscado">Início da Submissão de Artigos:</div>
+                        <div class="riscado">31 de Agosto</div>
                     </div>
                     <div class="data-item">
-                        <div class="evento-data">Notificação dos Aceitos:</div>
-                        <div class="prazo-data">Precisamos decidir...</div>
+                        <div class="evento-data">Fim da Submissão de Artigos:</div>
+                        <div class="riscado">15 de Setembro</div><div class="prazo-data">21 de Setembro</div>
                     </div>
                     <div class="data-item">
-                        <div class="evento-data">Envio da Versão Final (Camera-Ready):</div>
-                        <div class="prazo-data">Precisamos decidir...</div>
+                        <div class="evento-data">Avaliação dos Artigos:</div>
+                        <div class="riscado">21 de Setembro</div><div class="prazo-data">22 de Setembro</div>
                     </div>
                     <div class="data-item">
-                        <div class="evento-data">Inscrição de Autores:</div>
-                        <div class="prazo-data">Precisamos decidir...</div>
+                        <div class="evento-data">Notificação de Aceite dos Artigos:</div>
+                        <div class="riscado">28 de Setembro</div><div class="prazo-data">05 de Outubro</div>
                     </div>
                 </div>
             </section>
@@ -353,63 +617,64 @@
                     <h3>Sessões Técnicas</h3>
                     <p>Apresentação e debate de artigos científicos originais revisados por comitê de programa.</p>
                 </div>
-                <div class="card">
-                    <h3>Networking</h3>
-                    <p>Espaço para troca de ideias, aproximação entre universidade, empresas locais e fomento a parcerias.</p>
-                </div>
             </div>
         </section>
 
         <section class="secao-parceiros">
-            <h2>Organização e Parceiros</h2>
-
-            <h3>Apoio</h3>
+            <h3>Patrocínio</h3>
             <div class="grid-parceiros">
-                <img class="logo-parceiro" src="https://i.pinimg.com/originals/e7/9b/ad/e79bad6d4cb3b0d8886da27bdc7147a0.png" alt="Logo UFRGS">
-                <img class="logo-parceiro" src="imagens/unipampa_logo.png" alt="Logo UNIPAMPA">
-                <img class="logo-parceiro" src="https://lirp.cdn-website.com/705f6f12/dms3rep/multi/opt/UNISINOS---Posi-1920w.png" alt="Logo UNISINOS">
-                <img class="logo-parceiro" src="https://play-lh.googleusercontent.com/Nh_MB-F-dOv6sIjWMv9P3-t2bxountkNPeippQdMeS-aVlyR0Bp75MLg_VhR-OQW6g" alt="Logo CESLA">
+                <a href="https://fortesecurity.com.br/quem-somos" target="_blank"><img class="logo-diamante" src="assets/img/forte.png" alt="Logo Forte"></a>
+                <img class="logo-prata" src="assets/img/cancian_logo.png" alt="Logo Cancian">
+                <img class="logo-ouro" src="assets/img/quaza_logo.png" alt="Logo Quaza"> 
+            </div>
+            
+            <h3>Organização</h3>
+            <div class="grid-parceiros">
+                <img class="logo-org" src="assets/img/ufsm_logo.png" alt="Logo UFSM">
+                <img class="logo-org" src="assets/img/ctism.png" alt="Logo CTISM">
             </div>
             
             <h3>Realização</h3>
             <div class="grid-parceiros">
-                <img class="logo-parceiro" src="imagens/ufsm_logo.png" alt="Logo UFSM">
-                <img class="logo-parceiro" src="imagens/ctism_logo.png" alt="Logo CTISM">
+                <img class="logo-re" src="assets/img/logo_sbc.png" alt="Logo SBC">
             </div>
+            
+            <h3>Apoio</h3>
+            <div class="grid-parceiros">
+                <img class="logo-parceiro" src="assets/img/unipampa_logo.png" alt="Logo UNIPAMPA">
+            </div>
+            
         </section>
     </main>
-
     <footer>
-        <div class="footer-parceiros">
-            <div class="footer-coluna footer-coluna-realizacao">
+        <div class="footer-container">
+            <div class="footer-coluna">
                 <h3>Realização</h3>
-                <div class="grid-parceiros">
-                    <img class="logo-parceiro" src="https://www.ufsm.br/app/themes/ufsm/images/brasao.svg" alt="Logo UFSM">
-                    <img class="logo-parceiro" src="imagens/ctism_logo.png" alt="Logo CTISM">
+                <img class="logo-footer-remoto" src="assets/img/logo_sbc.png" alt="Logo SBC">
+            </div>
+
+            <div class="footer-coluna">
+                <h3>Organização</h3>
+                <div class="logos-lado-a-lado">
+                    <img class="logo-footer-remoto" src="https://www.ufsm.br/app/themes/ufsm/images/brasao.svg" alt="Logo UFSM">
+                    <img class="logo-footer-remoto" src="assets/img/ctism.png" alt="Logo CTISM">
                 </div>
             </div>
 
             <div class="footer-coluna">
-                <h3>Apoio</h3>
-                <div class="grid-parceiros">
-                    <img class="logo-parceiro" src="https://i.pinimg.com/originals/e7/9b/ad/e79bad6d4cb3b0d8886da27bdc7147a0.png" alt="Logo UFRGS">
-                    <img class="logo-parceiro" src="imagens/unipampa_logo.png" alt="Logo UNIPAMPA">
-                    <img class="logo-parceiro" src="https://lirp.cdn-website.com/705f6f12/dms3rep/multi/opt/UNISINOS---Posi-1920w.png" alt="Logo UNISINOS">
-                </div>
+                <h3>Contato</h3>
+                <p>Ajude a fortalecer a ERRC. Colabore e divulgue sua marca.</p>
+                <a href="mailto:errc2026@redes.ufsm.br">errc2026@redes.ufsm.br</a>
+                <a href="https://www.instagram.com/errc_escoladeredes?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" class="instagram-link" aria-label="Instagram do Evento">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.051.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/>
+                    </svg>
+                </a>
             </div>
         </div>
 
-        <div class="footer-info">
-            <div class="footer-texto">
-                <p>Organização: <strong>CTISM / UFSM</strong> - Santa Maria, RS</p>
-                <p>&copy; 2026 ERRC - Escola Regional de Redes de Computadores.</p>
-            </div>
-            
-            <a href="https://www.instagram.com/errc_escoladeredes?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" class="instagram-link" aria-label="Instagram do Evento">
-                <svg viewBox="0 0 24 24">
-                    <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.051.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/>
-                </svg>
-            </a>
+        <div class="footer-copyright">
+            <p>© 2026 ERRC - Escola Regional de Redes de Computadores. Todos os direitos reservados.</p>
         </div>
     </footer>
 </body>
