@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ERRC 2026 - Programação Prevista para o Evento</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: 'Inter', sans-serif; line-height: 1.6; color: #333; background-color: #f4f7f6; }
@@ -21,7 +22,7 @@
             position: relative;
             z-index: 10;
         }
-        
+
         .logo a {
             display: flex;
             align-items: center;
@@ -34,13 +35,66 @@
             padding: 5px 0;
             transition: transform 0.3s ease;
         }
-        
+
         .logo img:hover {
             transform: scale(1.03);
         }
 
-        nav a { color: white; text-decoration: none; margin-left: 20px; font-weight: 600; transition: 0.3s; padding: 5px 10px; border-radius: 4px;}
+        .nav-container {
+            display: flex;
+            align-items: center;
+        }
+
+        nav a { color: white; text-decoration: none; margin-left: 25px; font-weight: 600; transition: 0.3s; padding: 5px 10px; border-radius: 4px;}
         nav a:hover { background: #3a71c4; }
+
+        .linkedin-header-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: #0077b5;
+            color: white;
+            text-decoration: none;
+            padding: 6px 12px;
+            border-radius: 4px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-left: 25px;
+            transition: 0.3s ease;
+        }
+        .linkedin-header-btn:hover {
+            background: #005a8a;
+            transform: translateY(-1px);
+        }
+        .linkedin-header-btn svg {
+            width: 16px;
+            height: 16px;
+            fill: currentColor;
+        }
+
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 30px;
+            height: 21px;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            padding: 0;
+            z-index: 20;
+            outline: none;
+            -webkit-appearance: none;
+        }
+
+        .menu-toggle span {
+            width: 100%;
+            height: 3px;
+            background-color: #ffffff !important;
+            border-radius: 2px;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 2px rgba(255, 255, 255, 0.5);
+        }
 
         .banner { 
             text-align: center; 
@@ -51,7 +105,7 @@
         .banner h1 { font-size: 2.5rem; margin-bottom: 10px; }
 
         main { padding: 40px 10%; max-width: 1200px; margin: auto; }
-        
+
         .dia-seletor { 
             display: flex; 
             justify-content: center; 
@@ -89,7 +143,7 @@
         }
         .item-cronograma:last-child { border-bottom: none; }
         .item-cronograma:hover { background-color: #f9fbfd; }
-        
+
         .horario { 
             background: #f0f4f8; 
             padding: 20px; 
@@ -108,7 +162,194 @@
         .detalhes .sub-item { padding-left: 15px; border-left: 3px solid #3a71c4; }
         .detalhes .local { font-weight: 600; color: #666; font-size: 0.85rem; display: block; margin-top: 2px; }
         .detalhes p { color: #555; font-size: 0.95rem; line-height: 1.4; }
+
+        .palestrante-box {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            margin-top: 12px;
+            margin-bottom: 8px;
+            background: #f8fafc;
+            padding: 12px 15px;
+            border-radius: 8px;
+            border: 1px solid #e2e8f0;
+        }
+        .palestrante-foto {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid #04294f;
+            flex-shrink: 0;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+        }
+        .palestrante-info {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+        .palestrante-nome {
+            font-weight: 700;
+            color: #04294f;
+            font-size: 0.95rem;
+            margin-bottom: 3px;
+        }
+        .palestrante-bio {
+            font-size: 0.85rem;
+            color: #444;
+            line-height: 1.45;
+            margin-bottom: 8px;
+        }
         
+        .btn-sinopse {
+            background: #1a5c9e;
+            color: #ffffff;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.2s ease;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin-top: 5px;
+        }
+        .btn-sinopse:hover {
+            background: #04294f;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+        }
+        
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(4, 41, 79, 0.7);
+            backdrop-filter: blur(4px);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .modal-overlay.active {
+            display: flex;
+            opacity: 1;
+        }
+        .modal-content {
+            background: #ffffff;
+            width: 100%;
+            max-width: 680px;
+            border-radius: 12px;
+            padding: 30px;
+            position: relative;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.25);
+            transform: translateY(-20px);
+            transition: transform 0.3s ease;
+            max-height: 85vh;
+            overflow-y: auto;
+        }
+        .modal-overlay.active .modal-content {
+            transform: translateY(0);
+        }
+        .modal-close {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            background: none;
+            border: none;
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #888;
+            cursor: pointer;
+            transition: color 0.2s;
+            line-height: 1;
+        }
+        .modal-close:hover {
+            color: #04294f;
+        }
+        .modal-tag {
+            display: inline-block;
+            background: #e3f2fd;
+            color: #1976d2;
+            font-size: 0.75rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            padding: 4px 10px;
+            border-radius: 4px;
+            margin-bottom: 12px;
+        }
+        .modal-content h3 {
+            color: #04294f;
+            font-size: 1.3rem;
+            margin-bottom: 8px;
+            line-height: 1.35;
+        }
+        .modal-palestrante {
+            font-weight: 600;
+            color: #1a5c9e;
+            font-size: 0.95rem;
+            margin-bottom: 15px;
+        }
+        .modal-divider {
+            border: 0;
+            height: 1px;
+            background: #e2e8f0;
+            margin: 15px 0;
+        }
+        .modal-sinopse-label {
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 8px;
+        }
+        .modal-sinopse-texto {
+            color: #444;
+            font-size: 0.92rem;
+            line-height: 1.6;
+        }
+
+        .st-sala-block {
+            background: #f8fafc;
+            border-left: 4px solid #1a5c9e;
+            padding: 12px 15px;
+            border-radius: 6px;
+            margin-bottom: 15px;
+        }
+        .st-sala-titulo {
+            font-weight: 800;
+            color: #04294f;
+            font-size: 0.95rem;
+            margin-bottom: 6px;
+        }
+        .st-artigo-item {
+            margin-bottom: 8px;
+            padding-bottom: 6px;
+            border-bottom: 1px dashed #e2e8f0;
+        }
+        .st-artigo-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+        .st-artigo-titulo {
+            font-weight: 600;
+            color: #2b6cb0;
+        }
+        .st-artigo-autores {
+            font-size: 0.83rem;
+            color: #64748b;
+        }
+
         .tipo-tag { 
             display: inline-block; 
             padding: 4px 10px; 
@@ -124,84 +365,88 @@
         .tag-tecnica { background: #e8f5e9; color: #2e7d32; }
 
         footer { 
-            padding: 60px 20px 40px 20px; 
+            padding: 50px 10% 30px 10%; 
             background: #04294f; 
             color: white; 
-            margin-top: 80px; 
-            font-size: 0.95rem;
-        }
-        
-        .footer-parceiros {
-            max-width: 1200px;
-            margin: 0 auto 40px auto;
-            padding-bottom: 40px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            display: flex;
-            justify-content: center;
-            align-items: stretch;
+            margin-top: 60px; 
+            font-size: 0.9rem;
         }
 
-        .secao-parceiros {
-            flex: 1;
-            padding: 0 20px;
-            text-align: center;
-        }
-
-        .secao-parceiros.realizacao {
-            border-right: 1px solid rgba(255, 255, 255, 0.15);
-        }
-        
-        .footer-parceiros h3 {
-            font-size: 1rem;
-            color: #3a71c4;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-            margin-bottom: 25px;
-            font-weight: 700;
-        }
-
-        .grid-parceiros {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 35px;
-        }
-        
-        .logo-parceiro {
-            max-height: 75px; 
-            width: auto;
-            filter: grayscale(100%);
-            opacity: 0.7;
-            transition: 0.3s;
-        }
-        .logo-parceiro:hover {
-            filter: grayscale(0%);
-            opacity: 1;
-        }
-
-        .footer-info {
+        .footer-container {
             max-width: 1200px;
             margin: 0 auto;
             display: flex;
+            justify-content: space-between;
+            align-items: flex-start; 
+            gap: 30px;
+        }
+
+        .footer-coluna {
+            flex: 1;
+            display: flex;
             flex-direction: column;
-            justify-content: center;
             align-items: center;
             text-align: center;
-            gap: 20px;
+            padding: 0 15px;
         }
-        
-        .footer-texto p { opacity: 0.8; margin-bottom: 4px; }
-        .footer-texto p:last-child { margin-bottom: 0; }
-        .footer-texto strong { opacity: 1; color: #3a71c4; }
+
+        .footer-coluna:not(:last-child) {
+            border-right: 1px solid rgba(255, 255, 255, 0.15);
+        }
+
+        footer h3 {
+            font-size: 0.95rem;
+            color: #3a71c4;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 20px;
+            font-weight: 700;
+            width: 100%;
+        }
+
+        .footer-coluna p {
+            opacity: 0.85;
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+            line-height: 1.5;
+        }
+
+        .footer-coluna a {
+            color: #3a71c4;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        .footer-coluna a:hover {
+            text-decoration: underline;
+        }
+
+        .logos-lado-a-lado {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            width: 100%;
+            margin-top: 5px;
+        }
+
+        .logo-footer-remoto {
+            max-height: 125px; 
+            width: auto;
+            opacity: 0.8;
+            transition: 0.3s;
+        }
+
+        .logo-footer-remoto:hover {
+            opacity: 1;
+        }
 
         .instagram-link {
+            margin-top: 15px;
             display: inline-flex;
             align-items: center;
             justify-content: center;
             color: rgba(255, 255, 255, 0.7);
             transition: 0.3s ease;
-            text-decoration: none;
         }
         .instagram-link svg {
             width: 32px;
@@ -209,8 +454,18 @@
             fill: currentColor;
         }
         .instagram-link:hover {
-            color: #e1306c;
+            color: #e1306c; 
             transform: scale(1.1);
+        }
+
+        .footer-copyright {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            font-size: 0.8rem;
+            opacity: 0.6;
+            width: 100%;
         }
 
         @media (max-width: 992px) {
@@ -219,12 +474,71 @@
         }
 
         @media (max-width: 768px) {
-            header { flex-direction: column; text-align: center; padding: 1.5rem 20px; }
-            .logo { margin-bottom: 15px; }
-            .logo img { max-height: 90px; } 
-            nav { display: flex; flex-wrap: wrap; justify-content: center; gap: 5px; }
-            nav a { margin-left: 0; font-size: 0.9rem; padding: 5px 8px; }
-            
+            header { 
+                flex-direction: row; 
+                justify-content: space-between; 
+                align-items: center; 
+                padding: 1rem 20px; 
+            }
+            .logo { margin-bottom: 0; }
+            .logo img { max-height: 70px; } 
+
+            .menu-toggle {
+                display: flex;
+            }
+
+            .menu-toggle.active span:nth-child(1) {
+                transform: translateY(9px) rotate(45deg);
+            }
+            .menu-toggle.active span:nth-child(2) {
+                opacity: 0;
+            }
+            .menu-toggle.active span:nth-child(3) {
+                transform: translateY(-9px) rotate(-45deg);
+            }
+
+            .nav-container {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background-color: #04294f;
+                flex-direction: column;
+                align-items: center;
+                padding: 20px 0;
+                gap: 10px;
+                box-shadow: 0 10px 15px rgba(0,0,0,0.3);
+                border-top: 1px solid rgba(255, 255, 255, 0.1);
+            }
+
+            .nav-container.active {
+                display: flex;
+            }
+
+            nav { 
+                display: flex; 
+                flex-direction: column; 
+                align-items: center; 
+                gap: 5px; 
+                width: 100%;
+            }
+
+            nav a { 
+                margin-left: 0; 
+                font-size: 1rem; 
+                padding: 10px 0; 
+                width: 80%; 
+                text-align: center;
+                display: block;
+            }
+
+            .linkedin-header-btn { 
+                margin-left: 0; 
+                margin-top: 10px;
+                justify-content: center;
+            }
+
             .item-cronograma { grid-template-columns: 1fr; }
             .horario { 
                 justify-content: flex-start; 
@@ -234,331 +548,711 @@
             }
             .detalhes { padding: 15px 20px; }
             .banner h1 { font-size: 1.8rem; }
-            
-            .footer-parceiros { flex-direction: column; gap: 40px; }
-            .secao-parceiros.realizacao { border-right: none; border-bottom: 1px solid rgba(255, 255, 255, 0.1); padding-bottom: 40px; }
-            
-            .logo-parceiro { max-height: 60px; }
+
+            .palestrante-box {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .footer-container {
+                flex-direction: column;
+                gap: 40px;
+            }
+            .footer-coluna {
+                width: 100%;
+                padding: 0 0 30px 0;
+            }
+            .footer-coluna:not(:last-child) {
+                border-right: none;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.15); 
+            }
         }
     </style>
 </head>
 <body>
-
     <header>
-        <div class="logo">
-            <img src="imagens/logo_errc_2026.png" alt="Logo ERRC 2026" class="logo-header">
-        </div>
+    <div class="logo">
+        <a href="index.html">
+            <img src="assets/img/logo_errc_2026.png" alt="Logo ERRC 2026">
+        </a>
+    </div>
+
+    <button class="menu-toggle" id="menuToggle" aria-label="Abrir Menu">
+        <span></span>
+        <span></span>
+        <span></span>
+    </button>
+
+    <div class="nav-container" id="navContainer">
         <nav aria-label="Menu Principal">
-            <a href="index.html">Início</a>
             <a href="Sobre.html">Sobre</a>
             <a href="Localizacao.html">Localização</a>
             <a href="Programacao.html" style="background: #3a71c4;">Programação</a>
             <a href="Inscricoes.html">Inscrições</a>
+            <a href="Chamada.html">Chamada p/ Trabalhos</a>
             <a href="Organizacao.html">Organização</a>
-            <a href="Contato.html">Contato</a>
         </nav>
-    </header>
+        <a href="https://linkedin.com/company/escoladeredes-errc/" target="_blank" class="linkedin-header-btn" aria-label="LinkedIn da ERRC">
+            <svg viewBox="0 0 24 24">
+                <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+            </svg>
+            LinkedIn
+        </a>
+    </div>
+</header>
 
-    <section class="banner">
-        <h1>Cronograma do Evento</h1>
-        <p>Palestras, minicursos, oficinas e sessões técnicas do ERRC 2026.</p>
-    </section>
+<section class="banner">
+    <h1>Cronograma do Evento</h1>
+    <p>Palestras, minicursos, oficinas e sessões técnicas do ERRC 2026.</p>
+</section>
 
-    <main>
-        <div class="dia-seletor" id="botoes-dias">
-            <button class="dia-btn active" data-target="quarta">Quarta-feira (21/10)</button>
-            <button class="dia-btn" data-target="quinta">Quinta-feira (22/10)</button>
-            <button class="dia-btn" data-target="sexta">Sexta-feira (23/10)</button>
+<main>
+    <div class="dia-seletor" id="botoes-dias">
+        <button class="dia-btn active" data-target="quarta">Quarta-feira (21/10)</button>
+        <button class="dia-btn" data-target="quinta">Quinta-feira (22/10)</button>
+    </div>
+
+    <div class="cronograma-container">
+
+        <!-- QUARTA-FEIRA -->
+        <div id="quarta" class="dia-conteudo active">
+            <div class="item-cronograma">
+                <div class="horario">08:30 – 09:00</div>
+                <div class="detalhes">
+                    <h3>Credenciamento</h3>
+                    <p>Recepção dos participantes, confirmação de inscrições e entrega de materiais.</p>
+                    <span class="tipo-tag tag-social">Social</span>
+                </div>
+            </div>
+
+            <div class="item-cronograma">
+                <div class="horario">09:00 – 10:00</div>
+                <div class="detalhes">
+                    <h3>Palestra de Abertura - Eder John Scheid</h3>
+                    <span class="local">📍 Local: Auditório CTISM (Prédio 5)</span>
+                    <div class="palestrante-box">
+                        <img src="assets/img/eder.gif" alt="Foto do Prof. Eder" class="palestrante-foto">
+                        <div class="palestrante-info">
+                            <span class="palestrante-nome">Eder John Scheid</span>
+                            <p class="palestrante-bio">Professor na UFRGS e PhD pela Universidade de Zurique com foco em blockchains, Eder pesquisa contratos inteligentes, sistemas distribuídos e segurança cibernética, acumulando liderança e participação em diversos projetos internacionais de aplicação da tecnologia.</p>
+                            <button class="btn-sinopse" 
+                                    data-tag="Detalhes da Palestra"
+                                    data-label="Sinopse"
+                                    data-palestrante="Eder John Scheid" 
+                                    data-titulo="Medindo a Internet: Procurando Descentralização, Encontrando Dependências"
+                                    data-sinopse="A Internet nasceu com a premissa de ser aberta, distribuída, resiliente e sem um controle global sobre seu desenvolvimento. Essas características contribuíram para sua ampla adoção e consolidação como uma infraestrutura essencial à sociedade. Entretanto, sua evolução revela um paradoxo: enquanto sua arquitetura permite diferentes formas de descentralização, serviços e infraestruturas essenciais estão cada vez mais concentrados nas mãos de poucos atores. Nesse contexto, emergem questões relacionadas à privacidade, à autonomia e à soberania digital. Nesta palestra, serão apresentados resultados de pesquisas que investigam a centralização da Internet a partir de dois componentes fundamentais de sua infraestrutura: o DNS e o ecossistema de emissão de certificados SSL/TLS. Por meio de medições e análises, serão discutidos os níveis de concentração e as dependências existentes nesses ecossistemas, bem como suas implicações para a privacidade e a soberania digital.">
+                                Ver Detalhes da Palestra
+                            </button>
+                        </div>
+                    </div>
+                    <span class="tipo-tag tag-palestra">Palestra</span>
+                </div>
+            </div>
+
+            <div class="item-cronograma">
+                <div class="horario">10:00 – 11:00</div>
+                <div class="detalhes">
+                    <h3>Coffee Break & Podcast com a empresa FORTE</h3>
+                    <p>Espaço de integração, networking e gravação/transmissão do Podcast com a empresa FORTE.</p>
+                    <span class="tipo-tag tag-social">Social</span>
+                </div>
+            </div>
+
+            <div class="item-cronograma">
+                <div class="horario">11:00 – 12:00</div>
+                <div class="detalhes">
+                    <h3>Palestra de Empresa (FORTE) - José Luiz</h3>
+                    <span class="local">📍 Local: Auditório CTISM (Prédio 5)</span>
+                    <div class="palestrante-box">
+                        <img src="assets/img/jose_luiz.png" alt="Foto de José Luiz" class="palestrante-foto">
+                        <div class="palestrante-info">
+                            <span class="palestrante-nome">José Luiz Rodrigues Filho</span>
+                            <p class="palestrante-bio">Líder da Forte Security e da VencyOne com mais de 15 anos de experiência em Tecnologia da Informação e Cibersegurança, atua na proteção de ativos digitais, gestão de sistemas operativos e estratégias avançadas de segurança da informação e inteligência artificial.</p>
+                            <button class="btn-sinopse" 
+                                    data-tag="Detalhes da Palestra"
+                                    data-label="Sinopse"
+                                    data-palestrante="José Luiz Rodrigues Filho" 
+                                    data-titulo="Em definição..."
+                                    data-sinopse="...">
+                                Ver Detalhes da Palestra
+                            </button>
+                        </div>
+                    </div>
+                    <span class="tipo-tag tag-palestra">Palestra</span>
+                </div>
+            </div>
+
+            <div class="item-cronograma">
+                <div class="horario">12:00 – 14:00</div>
+                <div class="detalhes">
+                    <h3>Almoço - Intervalo</h3>
+                    <p>Pausa livre para alimentação.</p>
+                    <span class="tipo-tag tag-social">Intervalo</span>
+                </div>
+            </div>
+
+            <div class="item-cronograma">
+                <div class="horario">14:00 – 15:00</div>
+                <div class="detalhes">
+                    <h3>Atividades em Paralelo</h3>
+                    <div class="sub-atividades">
+                        <div class="sub-item">
+                            <strong>Palestra - Cesar Loureiro</strong>
+                            <span class="local">📍 Local: Auditório CTISM (Prédio 5)</span>
+                            <div class="palestrante-box">
+                                <img src="assets/img/cesar-loureiro.png" alt="Foto de Cesar Loureiro" class="palestrante-foto">
+                                <div class="palestrante-info">
+                                    <span class="palestrante-nome">Cesar Augusto Hass Loureiro</span>
+                                    <p class="palestrante-bio">Mestre em Ciência da Computação pela UFRGS e professor do IFRS – Campus Porto Alegre. Atua como colaborador do Ponto de Presença da RNP no Rio Grande do Sul e como coordenador técnico da MetroPOA.</p>
+                                    <button class="btn-sinopse" 
+                                            data-tag="Detalhes da Palestra"
+                                            data-label="Sinopse"
+                                            data-palestrante="Cesar Augusto Hass Loureiro" 
+                                            data-titulo="NAT e CGNAT: O Preço da Sobrevida do IPv4"
+                                            data-sinopse="A apresentação abordará a evolução do NAT, desde sua criação como resposta emergencial à escassez de endereços IPv4 até a adoção do CGNAT pelas operadoras, destacando seus impactos sobre a conectividade, segurança, rastreabilidade e prestação de serviços. A palestra também diferenciará os conceitos de tradução de endereços, controle de estado e políticas de firewall, explicando o uso compartilhado de portas e os desafios introduzidos pelo crescimento exponencial das conexões simultâneas — cenários para os quais muitas redes não estão preparadas. Ao final, serão discutidas métricas operacionais, boas práticas e a necessidade de evoluir novamente para uma conectividade fim a fim.">
+                                        Ver Detalhes da Palestra
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="sub-item">
+                            <strong>(ERRC) Seção Técnica - Apresentação dos Artigos</strong>
+                            <span class="local">📍 Local: Salas 1, 2, 3 e 4 | ⏱️ Horário da Sessão: 14:00 – 15:00</span>
+                            <p>Apresentação oral dos artigos científicos selecionados.</p>
+                            <button class="btn-sinopse" 
+                                    data-tag="Sessão Técnica (21/10)"
+                                    data-label="Artigos Selecionados e Salas"
+                                    data-palestrante="Quarta-feira (21/10) | Horário da Sessão: 14:00 às 15:00"
+                                    data-titulo="Apresentação de Artigos Científicos"
+                                    data-sinopse="
+                                    <div class='st-sala-block'>
+                                        <div class='st-sala-titulo'>📍 Sala 1 — Medição da Internet, Criptografia Pós-Quântica e Blockchain</div>
+                                        <div class='st-artigo-item'>
+                                            <div class='st-artigo-titulo'>#35999: Measuring Post-Quantum TLS Adoption in...</div>
+                                            <div class='st-artigo-autores'>Autores: Jhonatan Jauja Ccana, Eder John Scheid</div>
+                                        </div>
+                                        <div class='st-artigo-item'>
+                                            <div class='st-artigo-titulo'>#36368: Uma Solução Baseada em Blockchain para...</div>
+                                            <div class='st-artigo-autores'>Autores: Victor Octávio Rodrigues Alves, Eder John Scheid, Muriel Figueredo Franco</div>
+                                        </div>
+                                        <div class='st-artigo-item'>
+                                            <div class='st-artigo-titulo'>#35525: Exploring User Experience in Blockchain...</div>
+                                            <div class='st-artigo-autores'>Autores: Gabriel Berta, Eder John Scheid</div>
+                                        </div>
+                                        <div class='st-artigo-item'>
+                                            <div class='st-artigo-titulo'>#36218: Uma Plataforma Aberta e Instrumentada...</div>
+                                            <div class='st-artigo-autores'>Autores: Michel Silva, Leonardo Pinho</div>
+                                        </div>
+                                    </div>
+
+                                    <div class='st-sala-block'>
+                                        <div class='st-sala-titulo'>📍 Sala 2 — Detecção de Intrusão, APTs e Phishing</div>
+                                        <div class='st-artigo-item'>
+                                            <div class='st-artigo-titulo'>#36451: Análise da Recorrência de Técnicas e Táticas...</div>
+                                            <div class='st-artigo-autores'>Autores: Charllynson Carvalho Caxias, Brenda Salenave Santana</div>
+                                        </div>
+                                        <div class='st-artigo-item'>
+                                            <div class='st-artigo-titulo'>#36186: Comparação entre estratégias de agregação...</div>
+                                            <div class='st-artigo-autores'>Autores: Jaime Antonio Daniel Filho, Rafael Carneiro Pregardier, Murilo Block, Luis Alvaro de Lima Silva, Carlos Raniery Paula dos Santos</div>
+                                        </div>
+                                        <div class='st-artigo-item'>
+                                            <div class='st-artigo-titulo'>#36260: Análise Paralela de Logs SSH para Identificação...</div>
+                                            <div class='st-artigo-autores'>Autores: Rodrigo Berino Pereira, Ricardo de la Rocha Ladeira</div>
+                                        </div>
+                                        <div class='st-artigo-item'>
+                                            <div class='st-artigo-titulo'>#36067: Phishing Email Detection Using Ensemble...</div>
+                                            <div class='st-artigo-autores'>Autores: Guilherme Kuglin, Ricardo de la Rocha Ladeira</div>
+                                        </div>
+                                    </div>
+
+                                    <div class='st-sala-block'>
+                                        <div class='st-sala-titulo'>📍 Sala 3 — Segurança da Informação: LLMs, Malware, CTF e Ensino</div>
+                                        <div class='st-artigo-item'>
+                                            <div class='st-artigo-titulo'>#36075: Hands-On LLM Security: A Classroom Experiment...</div>
+                                            <div class='st-artigo-autores'>Autores: Ricardo de la Rocha Ladeira, Lucas Andrei Cancelier Marin, João Vitor Espig, Carlos Eduardo Perini Fidelis, Mickael Reichert, André Vitor</div>
+                                        </div>
+                                        <div class='st-artigo-item'>
+                                            <div class='st-artigo-titulo'>#35885: A 3D Virtual Laboratory for Teaching Physical...</div>
+                                            <div class='st-artigo-autores'>Autores: Fernanda Ribeiro Martins, Ricardo de la Rocha Ladeira</div>
+                                        </div>
+                                        <div class='st-artigo-item'>
+                                            <div class='st-artigo-titulo'>#36024: O Uso de LLMs na Detecção de Malware...</div>
+                                            <div class='st-artigo-autores'>Autores: Lucas Andrei Cancelier Marin, Ricardo de la Rocha Ladeira</div>
+                                        </div>
+                                        <div class='st-artigo-item'>
+                                            <div class='st-artigo-titulo'>#36323: Análise de Segurança de uma Plataforma...</div>
+                                            <div class='st-artigo-autores'>Autores: Lucas Andrei Cancelier Marin, Guilherme de Campos, Ricardo de la Rocha Ladeira</div>
+                                        </div>
+                                    </div>
+
+                                    <div class='st-sala-block'>
+                                        <div class='st-sala-titulo'>📍 Sala 4 — Internet das Coisas e Redes de Sensores</div>
+                                        <div class='st-artigo-item'>
+                                            <div class='st-artigo-titulo'>#36307: ICDR-IoT: Integração e Controle de Dispositivos...</div>
+                                            <div class='st-artigo-autores'>Autores: Marco Auth, Pedro Henrique Salvador, Rafael Pereira</div>
+                                        </div>
+                                        <div class='st-artigo-item'>
+                                            <div class='st-artigo-titulo'>#36318: Integração entre middleware IoT e aplicações...</div>
+                                            <div class='st-artigo-autores'>Autores: Eduardo Rodrigues Fortes, Tiago Antonio Rizzetti</div>
+                                        </div>
+                                        <div class='st-artigo-item'>
+                                            <div class='st-artigo-titulo'>#36338: Monitoramento de Hortas Urbanas sem Infraestrutura...</div>
+                                            <div class='st-artigo-autores'>Autores: Lorenzo Michelotti Palma, Lués Pedro Davila Zorzi, Rafael Teodósio Pereira</div>
+                                        </div>
+                                        <div class='st-artigo-item'>
+                                            <div class='st-artigo-titulo'>#36483: Emulação de uma WSN WiFi para Monitoramento...</div>
+                                            <div class='st-artigo-autores'>Autores: Yang da Fontoura Rodrigues, Rodrigo Brandão Mansilha</div>
+                                        </div>
+                                    </div>
+                                    ">
+                                Ver Artigos e Salas da Sessão Técnica
+                            </button>
+                        </div>
+                    </div>
+                    <span class="tipo-tag tag-tecnica">Sessão Técnica / Palestra</span>
+                </div>
+            </div>
+
+            <div class="item-cronograma">
+                <div class="horario">15:00 – 16:00</div>
+                <div class="detalhes">
+                    <h3>Palestra de Empresa (Quaza Tecnologia) - Pedro Wessel</h3>
+                    <span class="local">📍 Local: Auditório CTISM (Prédio 5)</span>
+                    <div class="palestrante-box">
+                        <img src="assets/img/pedro_quaza.png" alt="Foto de Pedro" class="palestrante-foto">
+                        <div class="palestrante-info">
+                            <span class="palestrante-nome">Pedro Wessel</span>
+                            <p class="palestrante-bio">Graduado em Redes de Computadores pela UFSM, pesquisador com trabalhos apresentados no Reino Unido e empreendedor no setor de tecnologia, atuando como fundador da Quaza Tecnologia.</p>
+                            <button class="btn-sinopse" 
+                                    data-tag="Detalhes da Palestra"
+                                    data-label="Sinopse"
+                                    data-palestrante="Pedro Wessel" 
+                                    data-titulo="Sua próxima colega de trabalho é uma IA. E agora?"
+                                    data-sinopse="A maioria das pessoas conhece a IA pelo prompt: você pergunta, ela responde. Mas o que acontece quando ela ganha acesso a dados e começa a participar da operação de cerca de 120 provedores de internet?<br><br>Nesta palestra, Pedro Wessel, egresso de Redes de Computadores da UFSM e fundador da Quaza Tecnologia, abre os bastidores dessa experiência: como conectar a IA aos sistemas com acesso controlado via MCP, colocar agentes para trabalhar em conjunto e automatizar o atendimento pelo WhatsApp. Apresenta falhas que a IA encontrou e que passavam despercebidas, erros que ela mesma cometeu e o trabalho necessário para conferir suas entregas. Casos reais que mostram por que entender de redes se torna ainda mais importante quando a IA entra na equipe — inclusive para perceber quando ela está errada.">
+                                Ver Detalhes da Palestra
+                            </button>
+                        </div>
+                    </div>
+                    <span class="tipo-tag tag-palestra">Palestra</span>
+                </div>
+            </div>
+
+            <div class="item-cronograma">
+                <div class="horario">16:00 – 16:30</div>
+                <div class="detalhes">
+                    <h3>Coffee Break</h3>
+                    <p>Espaço de integração e networking entre os participantes.</p>
+                    <span class="tipo-tag tag-social">Social</span>
+                </div>
+            </div>
+
+            <div class="item-cronograma">
+                <div class="horario">16:30 – 17:30</div>
+                <div class="detalhes">
+                    <h3>Palestra de Empresa (Banrisul) - Alexandre Timm Vieira</h3>
+                    <span class="local">📍 Local: Auditório INPE</span>
+                    <div class="palestrante-box">
+                        <img src="assets/img/alexandre_timm.png" alt="Foto de Alexandre Vieira" class="palestrante-foto">
+                        <div class="palestrante-info">
+                            <span class="palestrante-nome">Alexandre Timm Vieira</span>
+                            <p class="palestrante-bio">Gerente Executivo de Segurança de TI no Banrisul e professor universitário com 22 anos de experiência, é Mestre em Engenharia Elétrica pela PUCRS.</p>
+                            <button class="btn-sinopse" 
+                                    data-tag="Detalhes da Palestra"
+                                    data-label="Sinopse"
+                                    data-palestrante="Alexandre Timm Vieira" 
+                                    data-titulo="A nova era da segurança cibernética"
+                                    data-sinopse="Na nova era da cibersegurança, atacantes e defensores utilizam inteligência artificial. Mas quem terá a vantagem? Como a IA está mudando os ataques, as defesas e o trabalho dos profissionais de segurança? Esta palestra apresentará as principais transformações da cibersegurança, numa visão prática sobre os principais aspectos, riscos e competências que deverão marcar o futuro dos profissionais de computação e segurança.">
+                                Ver Detalhes da Palestra
+                            </button>
+                        </div>
+                    </div>
+                    <span class="tipo-tag tag-palestra">Palestra</span>
+                </div>
+            </div>
+
+            <div class="item-cronograma">
+                <div class="horario">18:00 – 19:00</div>
+                <div class="detalhes">
+                    <h3>Cerimônia de Abertura Oficial</h3>
+                    <span class="local">📍 Local: Auditório CTISM</span>
+                    <span class="tipo-tag tag-palestra">Solenidade</span>
+                </div>
+            </div>
+
+            <div class="item-cronograma">
+                <div class="horario">19:30 – 21:30</div>
+                <div class="detalhes">
+                    <h3>Confraternização & Churrasco</h3>
+                    <p>Momento de confraternização oficial e recepção da comunidade acadêmica (Cortesia da ERRC 2026).</p>
+                    <span class="local">📍 Local: Quiosque do CT - Campus UFSM (<a href="https://www.google.com/maps/search/?api=1&query=Quiosque+do+CT+UFSM" target="_blank" style="color: #1a5c9e; font-weight: 700; text-decoration: underline;">Ver no Google Maps</a>)</span>
+                    <span class="tipo-tag tag-social">Social</span>
+                </div>
+            </div>
         </div>
 
-        <div class="cronograma-container">
-
-            <div id="quarta" class="dia-conteudo active">
-                <div class="item-cronograma">
-                    <div class="horario">08:30 – 09:00</div>
-                    <div class="detalhes">
-                        <h3>Credenciamento</h3>
-                        <p>Recepção dos participantes, confirmação de inscrições e entrega de materiais.</p>
-                        <span class="tipo-tag tag-social">Social</span>
-                    </div>
-                </div>
-                
-                <div class="item-cronograma">
-                    <div class="horario">09:00 – 10:00</div>
-                    <div class="detalhes">
-                        <h3>Palestra de Abertura</h3>
-                        <span class="local">📍 Local: Auditório CTISM</span>
-                        <span class="tipo-tag tag-palestra">Palestra</span>
-                    </div>
-                </div>
-
-                <div class="item-cronograma">
-                    <div class="horario">10:00 – 10:45</div>
-                    <div class="detalhes">
-                        <h3>Coffee Break</h3>
-                        <p>Espaço de integração e networking entre os participantes.</p>
-                        <span class="tipo-tag tag-social">Social</span>
-                    </div>
-                </div>
-
-                <div class="item-cronograma">
-                    <div class="horario">10:45 - 12:00</div>
-                    <div class="detalhes">
-                        <h3>Palestra de Empresa</h3>
-                        <p>Apresentação e discussões com foco em tecnologias corporativas e mercado institucional.</p>
-                        <span class="tipo-tag tag-palestra">Palestra</span>
-                    </div>
-                </div>
-
-                <div class="item-cronograma">
-                    <div class="horario">12:00 – 14:00</div>
-                    <div class="detalhes">
-                        <h3>Almoço - Intervalo</h3>
-                        <p>Pausa livre para alimentação.</p>
-                        <span class="tipo-tag tag-social">Intervalo</span>
-                    </div>
-                </div>
-
-                <div class="item-cronograma">
-                    <div class="horario">14:00 – 15:30</div>
-                    <div class="detalhes">
-                        <h3>Palestras Simultâneas</h3>
-                        <div class="sub-atividades">
-                            <div class="sub-item">
-                                <strong>Palestra 1</strong>
-                                <span class="local">📍 Local: Auditório CTISM</span>
-                            </div>
-                            <div class="sub-item">
-                                <strong>Palestra 2</strong>
-                                <span class="local">📍 Local: Auditório INPE</span>
-                            </div>
+        <!-- QUINTA-FEIRA -->
+        <div id="quinta" class="dia-conteudo">
+            <div class="item-cronograma">
+                <div class="horario">08:30 – 09:30</div>
+                <div class="detalhes">
+                    <h3>Palestra - Juliana Vizzotto</h3>
+                    <span class="local">📍 Local: Auditório CTISM (Prédio 5)</span>
+                    <div class="palestrante-box">
+                        <img src="assets/img/juliana_vizzotto.gif" alt="Foto de Juliana Vizzotto" class="palestrante-foto">
+                        <div class="palestrante-info">
+                            <span class="palestrante-nome">Juliana Kaizer Vizzotto</span>
+                            <p class="palestrante-bio">Doutora e Mestra em Ciência da Computação pela UFRGS (com período na Indiana University) e Bacharel pela UCPel, a docente atua no DLSC/UFSM e é especialista em Computação Quântica, Teoria da Computação e Semântica Formal.</p>
+                            <button class="btn-sinopse" 
+                                    data-tag="Detalhes da Palestra"
+                                    data-label="Sinopse"
+                                    data-palestrante="Juliana Kaizer Vizzotto" 
+                                    data-titulo="Criptografia Quântica: Da Física do Qubit à Proteção em Redes"
+                                    data-sinopse="Você sabia que o avanço da computação quântica pode tornar obsoletos os sistemas de segurança que protegem a internet hoje? Nesta palestra vamos entender como algoritmos quânticos, como Shor, ameaçam padrões consolidados como RSA. Entendendo o Qubit, vamos descobrir como fenômenos da física quântica — superposição, o teorema da não-clonagem e a medição — criam um escudo inviolável através do protocolo BB84 (QKD), transformando qualquer tentativa de espionagem em um rastro de erro detectável. Vamos conferir como se preparar para esse novo cenário e por onde começar na era da Criptografia Pós-Quântica.">
+                                Ver Detalhes da Palestra
+                            </button>
                         </div>
-                        <span class="tipo-tag tag-palestra">Palestra</span>
                     </div>
-                </div>
-
-                <div class="item-cronograma">
-                    <div class="horario">15:30 – 16:00</div>
-                    <div class="detalhes">
-                        <h3>Coffee Break</h3>
-                        <span class="tipo-tag tag-social">Social</span>
-                    </div>
-                </div>
-
-                <div class="item-cronograma">
-                    <div class="horario">16:00 – 17:30</div>
-                    <div class="detalhes">
-                        <h3>Minicursos Paralelos</h3>
-                        <div class="sub-atividades">
-                            <div class="sub-item"><strong>Minicurso 1</strong></div>
-                            <div class="sub-item"><strong>Minicurso 2</strong></div>
-                        </div>
-                        <span class="tipo-tag tag-minicurso">Minicurso</span>
-                    </div>
-                </div>
-
-                <div class="item-cronograma">
-                    <div class="horario">18:00 - 19:00</div>
-                    <div class="detalhes">
-                        <h3>Cerimônia de Abertura Oficial</h3>
-                        <span class="local">📍 Local: Auditório Wilson Aita</span>
-                        <span class="tipo-tag tag-palestra">Solenidade</span>
-                    </div>
-                </div>
-
-                <div class="item-cronograma">
-                    <div class="horario">19:30 - 21:30</div>
-                    <div class="detalhes">
-                        <h3>Coquetel de Boas-vindas</h3>
-                        <p>Momento de confraternização oficial e recepção da comunidade acadêmica.</p>
-                        <span class="tipo-tag tag-social">Social</span>
-                    </div>
+                    <span class="tipo-tag tag-palestra">Palestra</span>
                 </div>
             </div>
 
-            <div id="quinta" class="dia-conteudo">
-                <div class="item-cronograma">
-                    <div class="horario">08:30 – 10:00</div>
-                    <div class="detalhes">
-                        <h3>Atividades Paralelas</h3>
-                        <div class="sub-atividades">
-                            <div class="sub-item">
-                                <strong>(ERRC) Seção Técnica</strong>
-                                <p>Apresentação oral dos artigos científicos selecionados.</p>
-                            </div>
-                            <div class="sub-item">
-                                <strong>WRSeg - Palestra 3</strong>
-                                <p>Workshop em Relato de Casos de Segurança Cibernética.</p>
-                            </div>
+            <div class="item-cronograma">
+                <div class="horario">09:30 – 12:00</div>
+                <div class="detalhes">
+                    <h3>Minicursos Simultâneos</h3>
+                    <div class="sub-atividades">
+                        <div class="sub-item">
+                            <strong>Minicurso 1 - Computação Forense: Conceitos, Práticas e Oportunidades de Pesquisa</strong>
+                            <p><strong>Autor:</strong> Ricardo Tombesi</p>
+                            <span class="local">⏱️ Horário: 09:30 – 12:00 | 📍 Local: Lab. 304 (Prédio 5C)</span>
                         </div>
-                        <span class="tipo-tag tag-tecnica">Sessão Técnica / Palestra</span>
-                    </div>
-                </div>
-
-                <div class="item-cronograma">
-                    <div class="horario">10:00 – 10:30</div>
-                    <div class="detalhes">
-                        <h3>Coffee Break</h3>
-                        <span class="tipo-tag tag-social">Social</span>
-                    </div>
-                </div>
-
-                <div class="item-cronograma">
-                    <div class="horario">10:30 – 12:00</div>
-                    <div class="detalhes">
-                        <h3>Sessões Técnicas Simultâneas</h3>
-                        <div class="sub-atividades">
-                            <div class="sub-item"><strong>(ERRC) Seção Técnica</strong> — Apresentação dos artigos aprovados.</div>
-                            <div class="sub-item"><strong>WRSeg - Seção Técnica</strong> — Apresentação dos artigos de segurança.</div>
+                        <div class="sub-item">
+                            <strong>Minicurso 2 - Federated Learning em Redes IoT: Monitoramento e Experimentação em Condições de Redes Adversas</strong>
+                            <p><strong>Autor:</strong> Ronaldo Nascimento</p>
+                            <span class="local">⏱️ Horário: 09:30 – 12:00 | 📍 Local: Lab. 308 (Prédio 5D)</span>
                         </div>
-                        <span class="tipo-tag tag-tecnica">Sessão Técnica</span>
                     </div>
-                </div>
-
-                <div class="item-cronograma">
-                    <div class="horario">12:00 – 14:00</div>
-                    <div class="detalhes">
-                        <h3>Almoço - Intervalo</h3>
-                        <span class="tipo-tag tag-social">Intervalo</span>
-                    </div>
-                </div>
-
-                <div class="item-cronograma">
-                    <div class="horario">14:00 – 17:00</div>
-                    <div class="detalhes">
-                        <h3>(ERRC) Seção Técnica Geral</h3>
-                        <p>Continuidade das apresentações dos blocos de artigos e trabalhos científicos aceitos na ERRC.</p>
-                        <span class="tipo-tag tag-tecnica">Sessão Técnica</span>
-                    </div>
-                </div>
-
-                <div class="item-cronograma">
-                    <div class="horario">14:00 – 15:00</div>
-                    <div class="detalhes">
-                        <h3>Palestra & Oficina</h3>
-                        <div class="sub-atividades">
-                            <div class="sub-item">
-                                <strong>Palestra 4</strong>
-                                <span class="local">📍 Local: Auditório CTISM</span>
-                            </div>
-                            <div class="sub-item"><strong>Oficina 1</strong></div>
-                        </div>
-                        <span class="tipo-tag tag-minicurso">Oficinas / Palestras</span>
-                    </div>
-                </div>
-
-                <div class="item-cronograma">
-                    <div class="horario">15:00 – 15:30</div>
-                    <div class="detalhes">
-                        <h3>Coffee Break</h3>
-                        <span class="tipo-tag tag-social">Social</span>
-                    </div>
-                </div>
-
-                <div class="item-cronograma">
-                    <div class="horario">15:30 – 16:30</div>
-                    <div class="detalhes">
-                        <h3>Palestra & Oficina (Continuação)</h3>
-                        <div class="sub-atividades">
-                            <div class="sub-item">
-                                <strong>Palestra 5</strong>
-                                <span class="local">📍 Local: Auditório CTISM</span>
-                            </div>
-                            <div class="sub-item"><strong>Oficina 2</strong></div>
-                        </div>
-                        <span class="tipo-tag tag-minicurso">Oficinas / Palestras</span>
-                    </div>
+                    <span class="tipo-tag tag-minicurso">Minicursos</span>
                 </div>
             </div>
 
-            <div id="sexta" class="dia-conteudo">
-                <div class="item-cronograma">
-                    <div class="horario">08:30 – 09:30</div>
-                    <div class="detalhes">
-                        <h3>Palestra 6</h3>
-                        <p>Última sessão magna de palestras convidadas da edição.</p>
-                        <span class="tipo-tag tag-palestra">Palestra</span>
-                    </div>
-                </div>
-
-                <div class="item-cronograma">
-                    <div class="horario">09:30 - 10:30</div>
-                    <div class="detalhes">
-                        <h3>Cerimônia de Encerramento</h3>
-                        <p>Premiações de melhores artigos, considerações do comitê organizador e encerramento formal.</p>
-                        <span class="tipo-tag tag-palestra">Solenidade</span>
-                    </div>
-                </div>
-
-                <div class="item-cronograma">
-                    <div class="horario">10:00 – 15:30</div>
-                    <div class="detalhes">
-                        <h3>Confraternização do Evento</h3>
-                        <p>Almoço coletivo e espaço descontraído estendido para encerramento social dos participantes.</p>
-                        <span class="tipo-tag tag-social">Social</span>
-                    </div>
+            <div class="item-cronograma">
+                <div class="horario">10:30 – 11:00</div>
+                <div class="detalhes">
+                    <h3>Coffee Break</h3>
+                    <p>Pausa intercalada durante a realização dos minicursos.</p>
+                    <span class="tipo-tag tag-social">Social</span>
                 </div>
             </div>
 
-        </div>
-    </main>
-
-    <footer>
-        <div class="footer-parceiros">
-            <div class="secao-parceiros realizacao">
-                <h3>Realização</h3>
-                <div class="grid-parceiros">
-                    <img class="logo-parceiro" src="https://www.ufsm.br/app/themes/ufsm/images/brasao.svg" alt="Logo UFSM">
-                    <img class="logo-parceiro" src="imagens/ctism_logo.png" alt="Logo CTISM">
+            <div class="item-cronograma">
+                <div class="horario">12:00 – 14:00</div>
+                <div class="detalhes">
+                    <h3>Almoço - Intervalo</h3>
+                    <p>Pausa livre para alimentação.</p>
+                    <span class="tipo-tag tag-social">Intervalo</span>
                 </div>
             </div>
-            
-            <div class="secao-parceiros apoio">
-                <h3>Apoio</h3>
-                <div class="grid-parceiros">
-                    <img class="logo-parceiro" src="https://i.pinimg.com/originals/e7/9b/ad/e79bad6d4cb3b0d8886da27bdc7147a0.png" alt="Logo UFRGS">
-                    <img class="logo-parceiro" src="imagens/unipampa_logo.png" alt="Logo UNIPAMPA">
-                    <img class="logo-parceiro" src="https://lirp.cdn-website.com/705f6f12/dms3rep/multi/opt/UNISINOS---Posi-1920w.png" alt="Logo UNISINOS">
+
+            <div class="item-cronograma">
+                <div class="horario">14:00 – 15:00</div>
+                <div class="detalhes">
+                    <h3>Palestra - Estefânia Pianoski</h3>
+                    <span class="local">📍 Local: Auditório SAB</span>
+                    <div class="palestrante-box">
+                        <img src="assets/img/estefania.jpg" alt="Foto de Estefânia Pianoski" class="palestrante-foto">
+                        <div class="palestrante-info">
+                            <span class="palestrante-nome">Estefânia Pianoski</span>
+                            <p class="palestrante-bio">Mestre em Engenharia da Informação pela UFABC, especialista em Gestão em Segurança da Informação e Coordenadora de P&D em Cibersegurança na RNP.</p>
+                            <button class="btn-sinopse" 
+                                    data-tag="Detalhes da Palestra"
+                                    data-label="Sinopse"
+                                    data-palestrante="Estefânia Pianoski" 
+                                    data-titulo="Carreira em Segurança da Informação: por onde começar?"
+                                    data-sinopse="Segurança da Informação vai muito além da área técnica. Nesta palestra, vamos conhecer diferentes possibilidades de carreira — de Gestão, Governança e Privacidade a DevSecOps, Red Team, Blue Team, SOC e Pesquisa — e entender quais conhecimentos e habilidades podem ajudar quem está começando na área de Tecnologia.<br><br>A partir da minha própria trajetória profissional, vou compartilhar aprendizados, desafios e caminhos possíveis para construir uma carreira em Segurança da Informação, além de dicas sobre certificações, competências e primeiros passos.<br><br>Uma conversa para quem está começando e quer descobrir onde pode chegar.">
+                                Ver Detalhes da Palestra
+                            </button>
+                        </div>
+                    </div>
+                    <span class="tipo-tag tag-palestra">Palestra</span>
+                </div>
+            </div>
+
+            <div class="item-cronograma">
+                <div class="horario">15:00 – 15:30</div>
+                <div class="detalhes">
+                    <h3>Coffee Break</h3>
+                    <p>Espaço de integração e networking entre os participantes.</p>
+                    <span class="tipo-tag tag-social">Social</span>
+                </div>
+            </div>
+
+            <div class="item-cronograma">
+                <div class="horario">15:30 – 17:00</div>
+                <div class="detalhes">
+                    <h3>Atividades em Paralelo</h3>
+                    <div class="sub-atividades">
+                        <div class="sub-item">
+                            <strong>Minicurso 3 - Machine Learning Meets Networks: um guia prático para aplicações de aprendizado de máquina em redes sem fio e IoT</strong>
+                            <p><strong>Autor:</strong> Lorenzo Donatti</p>
+                            <span class="local">⏱️ Horário: 15:30 – 17:00 | 📍 Local: Lab. 305 (Prédio 5C)</span>
+                        </div>
+                        <div class="sub-item">
+                            <strong>(ERRC) Seção Técnica - Apresentação dos Artigos</strong>
+                            <span class="local">📍 Local: Salas 1, 2, 3 e 4 | ⏱️ Horário da Sessão: 15:30 – 17:00</span>
+                            <p>Apresentação oral dos artigos científicos selecionados.</p>
+                            <button class="btn-sinopse" 
+                                    data-tag="Sessão Técnica (22/10)"
+                                    data-label="Artigos Selecionados e Salas"
+                                    data-palestrante="Quinta-feira (22/10) | Horário da Sessão: 15:30 às 17:00"
+                                    data-titulo="Apresentação de Artigos Científicos"
+                                    data-sinopse="
+                                    <div class='st-sala-block'>
+                                        <div class='st-sala-titulo'>📍 Sala 1 — IA Generativa: Segurança de LLMs e Ensino de Redes</div>
+                                        <div class='st-artigo-item'>
+                                            <div class='st-artigo-titulo'>#36383: IA Generativa no Ensino de Redes de Computadores...</div>
+                                            <div class='st-artigo-autores'>Autores: Alex Camargo, Sandra Dutra Piovesan, Érico Amaral</div>
+                                        </div>
+                                        <div class='st-artigo-item'>
+                                            <div class='st-artigo-titulo'>#36412: Avaliando Vazamento de System Prompt em...</div>
+                                            <div class='st-artigo-autores'>Autores: Gabriel Rodrigues da Rocha, Rodrigo Brandão Mansilha</div>
+                                        </div>
+                                        <div class='st-artigo-item'>
+                                            <div class='st-artigo-titulo'>#36332: Mecanismos de Avaliação de Segurança para...</div>
+                                            <div class='st-artigo-autores'>Autores: Emilly Stephanny Silva, Isabela Kremp Narciso, Milton Pagliuso, Marcos Antonio Simplicio Jr, Victor Takashi Hayashi, Charles Christian Miers</div>
+                                        </div>
+                                        <div class='st-artigo-item'>
+                                            <div class='st-artigo-titulo'>#36080: Assessing the Security of 'Vibe Coding'...</div>
+                                            <div class='st-artigo-autores'>Autores: Leandro Retzlaff, Alan M. Schumacher</div>
+                                        </div>
+                                        <div class='st-artigo-item'>
+                                            <div class='st-artigo-titulo'>#36068: Mitigação de Vulnerabilidades de Segurança em...</div>
+                                            <div class='st-artigo-autores'>Autores: Robson Daniel Marchesan, Raul Ceretta Nunes</div>
+                                        </div>
+                                    </div>
+
+                                    <div class='st-sala-block'>
+                                        <div class='st-sala-titulo'>📍 Sala 2 — Detecção de Ataques e Anomalias com Aprendizado de Máquina</div>
+                                        <div class='st-artigo-item'>
+                                            <div class='st-artigo-titulo'>#36192: CyberEye: Sistema de Detecção de Intrusão...</div>
+                                            <div class='st-artigo-autores'>Autores: Igor Boenavides, Jardel Batista Gonçalves, Matheus Lorenzato Braga</div>
+                                        </div>
+                                        <div class='st-artigo-item'>
+                                            <div class='st-artigo-titulo'>#36173: Investigação da Importância de Atributos para...</div>
+                                            <div class='st-artigo-autores'>Autores: Carlos Lima, Pedro Lui, Lucas Siqueira, Juliano Kazienko, Vagner Ereno Quincozes, Silvio Quincozes, Daniel Welfer</div>
+                                        </div>
+                                        <div class='st-artigo-item'>
+                                            <div class='st-artigo-titulo'>#36265: Para Além das Médias Móveis: Uma Abordagem...</div>
+                                            <div class='st-artigo-autores'>Autores: Denner Ayres, Romulo de Moraes, Giancarlo Lucca, André Riker, Roger Immich, Bruno L. Dalmazo</div>
+                                        </div>
+                                        <div class='st-artigo-item'>
+                                            <div class='st-artigo-titulo'>#36444: Temporizadores Dinâmicos no Plano de Dados...</div>
+                                            <div class='st-artigo-autores'>Autores: Ryan Borges de Leon, Bruno L. Dalmazo</div>
+                                        </div>
+                                        <div class='st-artigo-item'>
+                                            <div class='st-artigo-titulo'>#36436: Planejamento, Implantação e Avaliação de...</div>
+                                            <div class='st-artigo-autores'>Autores: João Pedro Pinto Anony, Suzianne Tormann, Simone Ceolin, Renato Preigschadt de Azevedo</div>
+                                        </div>
+                                    </div>
+
+                                    <div class='st-sala-block'>
+                                        <div class='st-sala-titulo'>📍 Sala 3 — Infraestrutura, Planejamento e Gerência de Redes</div>
+                                        <div class='st-artigo-item'>
+                                            <div class='st-artigo-titulo'>#36450: Migração da Rede Sem Fio do Colégio Técnico...</div>
+                                            <div class='st-artigo-autores'>Autores: Andre Simon da Silveira, Douglas Böck, Lorenzo Ropke, Tiago Antônio Rizzetti</div>
+                                        </div>
+                                        <div class='st-artigo-item'>
+                                            <div class='st-artigo-titulo'>#36491: NetBox como fonte de verdade para a documentação...</div>
+                                            <div class='st-artigo-autores'>Autores: Lorenzo Basso Ropke, Tiago Antonio Rizzetti, Renato Preigschadt</div>
+                                        </div>
+                                        <div class='st-artigo-item'>
+                                            <div class='st-artigo-titulo'>#36089: NetLab Educacional: Desenvolvimento de...</div>
+                                            <div class='st-artigo-autores'>Autores: Yuri Gonçalves, João Ribeiro</div>
+                                        </div>
+                                        <div class='st-artigo-item'>
+                                            <div class='st-artigo-titulo'>#36492: Planejamento e Otimização de Redes FTTH...</div>
+                                            <div class='st-artigo-autores'>Autores: Diogo Moi, Viviane Cátia Kohler, Olinto de Araújo, Guilherme Dhein</div>
+                                        </div>
+                                        <div class='st-artigo-item'>
+                                            <div class='st-artigo-titulo'>#36298: Técnica Experimental para Mensuração de...</div>
+                                            <div class='st-artigo-autores'>Autores: Davi Lopes Lemos, Naylor Bastiani Perez, Leonardo Pinho</div>
+                                        </div>
+                                    </div>
+
+                                    <div class='st-sala-block'>
+                                        <div class='st-sala-titulo'>📍 Sala 4 — Análise de Ameaças e Segurança Ofensiva</div>
+                                        <div class='st-artigo-item'>
+                                            <div class='st-artigo-titulo'>#36072: Avaliação da Qualidade de Dados Sintéticos...</div>
+                                            <div class='st-artigo-autores'>Autores: Murilo Block, Rafael Carneiro Pregardier, Jaime Antonio Daniel Filho, Carlos Raniery Paula dos Santos, Luis Alvaro de Lima Silva</div>
+                                        </div>
+                                        <div class='st-artigo-item'>
+                                            <div class='st-artigo-titulo'>#36285: Detecção de Ameaças Zero-Day em Tráfego...</div>
+                                            <div class='st-artigo-autores'>Autores: Ezekiel Pincolini Netto, Mikael Fontoura do Nascimento, Gabriel Stiegemeier, Marcia Henke</div>
+                                        </div>
+                                        <div class='st-artigo-item'>
+                                            <div class='st-artigo-titulo'>#36495: Análise de Segurança de um Sistema de...</div>
+                                            <div class='st-artigo-autores'>Autores: Gabriel Haab, Leandro Beria, Erico M. H. do Amaral</div>
+                                        </div>
+                                        <div class='st-artigo-item'>
+                                            <div class='st-artigo-titulo'>#35528: WrappEm: Uma Ferramenta para Injeção de...</div>
+                                            <div class='st-artigo-autores'>Autores: Augusto Goulart, Edson Machado Fumagalli Junior</div>
+                                        </div>
+                                    </div>
+                                    ">
+                                Ver Artigos e Salas da Sessão Técnica
+                            </button>
+                        </div>
+                    </div>
+                    <span class="tipo-tag tag-tecnica">Sessão Técnica / Minicurso</span>
                 </div>
             </div>
         </div>
-        
-        <div class="footer-info">
-            <div class="footer-texto">
-                <p>Organização: <strong>CTISM / UFSM</strong> - Santa Maria, RS</p>
-                <p>&copy; 2026 ERRC - Escola Regional de Redes de Computadores.</p>
+
+    </div>
+</main>
+
+<div id="modalPalestra" class="modal-overlay">
+    <div class="modal-content">
+        <button class="modal-close" id="modalClose" aria-label="Fechar">&times;</button>
+        <span class="modal-tag">Detalhes</span>
+        <h3 id="modalTitulo">Título</h3>
+        <p class="modal-palestrante" id="modalPalestrante">Palestrante: Nome</p>
+        <hr class="modal-divider">
+        <div class="modal-sinopse-label">Descrição</div>
+        <div class="modal-sinopse-texto" id="modalSinopse">Conteúdo...</div>
+    </div>
+</div>
+
+<footer>
+    <div class="footer-container">
+        <div class="footer-coluna">
+            <h3>Realização</h3>
+            <img class="logo-footer-remoto" src="assets/img/logo_sbc.png" alt="Logo SBC">
+        </div>
+
+        <div class="footer-coluna">
+            <h3>Organização</h3>
+            <div class="logos-lado-a-lado">
+                <img class="logo-footer-remoto" src="https://www.ufsm.br/app/themes/ufsm/images/brasao.svg" alt="Logo UFSM">
+                <img class="logo-footer-remoto" src="assets/img/ctism.png" alt="Logo CTISM">
             </div>
-            
+        </div>
+
+        <div class="footer-coluna">
+            <h3>Contato</h3>
+            <p>Ajude a fortalecer a ERRC. Colabore e divulgue sua marca.</p>
+            <a href="mailto:errc2026@redes.ufsm.br">errc2026@redes.ufsm.br</a>
             <a href="https://www.instagram.com/errc_escoladeredes?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" class="instagram-link" aria-label="Instagram do Evento">
                 <svg viewBox="0 0 24 24">
-                    <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.051.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/>
+                    <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.64.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.051.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/>
                 </svg>
             </a>
         </div>
-    </footer>
+    </div>
+    <div class="footer-copyright">
+        <p>© 2026 ERRC - Escola Regional de Redes de Computadores. Todos os direitos reservados.</p>
+    </div>
+</footer>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const botoes = document.querySelectorAll('.dia-btn');
-            const conteudos = document.querySelectorAll('.dia-conteudo');
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
 
-            botoes.forEach(botao => {
-                botao.addEventListener('click', () => {
-                    botoes.forEach(b => b.classList.remove('active'));
-                    botao.classList.add('active');
+        // Menu Mobile Toggle
+        const menuToggle = document.getElementById('menuToggle');
+        const navContainer = document.getElementById('navContainer');
 
-                    const alvo = botao.getAttribute('data-target');
+        if (menuToggle && navContainer) {
+            menuToggle.addEventListener('click', () => {
+                menuToggle.classList.toggle('active');
+                navContainer.classList.toggle('active');
+            });
+        }
 
-                    conteudos.forEach(conteudo => {
-                        if (conteudo.id === alvo) {
-                            conteudo.classList.add('active');
-                        } else {
-                            conteudo.classList.remove('active');
-                        }
-                    });
+        // Seleção de Dias (Quarta / Quinta)
+        const botoes = document.querySelectorAll('.dia-btn');
+        const conteudos = document.querySelectorAll('.dia-conteudo');
+
+        botoes.forEach(botao => {
+            botao.addEventListener('click', () => {
+                botoes.forEach(b => b.classList.remove('active'));
+                botao.classList.add('active');
+
+                const alvo = botao.getAttribute('data-target');
+
+                conteudos.forEach(conteudo => {
+                    if (conteudo.id === alvo) {
+                        conteudo.classList.add('active');
+                    } else {
+                        conteudo.classList.remove('active');
+                    }
                 });
             });
         });
-    </script>
+
+        // Lógica do Pop-up (Modal) para Palestras e Sessões Técnicas
+        const modal = document.getElementById('modalPalestra');
+        const modalClose = document.getElementById('modalClose');
+        const modalTitulo = document.getElementById('modalTitulo');
+        const modalPalestrante = document.getElementById('modalPalestrante');
+        const modalSinopse = document.getElementById('modalSinopse');
+
+        const btnsSinopse = document.querySelectorAll('.btn-sinopse');
+
+        btnsSinopse.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const palestrante = btn.getAttribute('data-palestrante');
+                const titulo = btn.getAttribute('data-titulo');
+                const sinopse = btn.getAttribute('data-sinopse');
+                const tag = btn.getAttribute('data-tag') || 'Detalhes da Palestra';
+                const label = btn.getAttribute('data-label') || 'Sinopse';
+
+                const modalTag = modal.querySelector('.modal-tag');
+                const modalSinopseLabel = modal.querySelector('.modal-sinopse-label');
+
+                if (modalTag) modalTag.textContent = tag;
+                if (modalSinopseLabel) modalSinopseLabel.textContent = label;
+
+                if (modalPalestrante) {
+                    if (palestrante) {
+                        modalPalestrante.style.display = 'block';
+                        modalPalestrante.textContent = (palestrante.includes('Quarta-feira') || palestrante.includes('Quinta-feira') || palestrante.includes('Horário')) ? palestrante : 'Palestrante: ' + palestrante;
+                    } else {
+                        modalPalestrante.style.display = 'none';
+                    }
+                }
+
+                if (modalTitulo) modalTitulo.textContent = titulo;
+                if (modalSinopse) modalSinopse.innerHTML = sinopse;
+
+                if (modal) modal.classList.add('active');
+            });
+        });
+
+        // Fechar modal ao clicar no botão X
+        if (modalClose) {
+            modalClose.addEventListener('click', () => {
+                modal.classList.remove('active');
+            });
+        }
+
+        // Fechar modal ao clicar fora da caixa branca
+        if (modal) {
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    modal.classList.remove('active');
+                }
+            });
+        }
+
+        // Fechar modal ao pressionar a tecla ESC
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && modal && modal.classList.contains('active')) {
+                modal.classList.remove('active');
+            }
+        });
+
+    });
+</script>
+
 </body>
 </html>
